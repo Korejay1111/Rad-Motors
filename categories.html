@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse our car categories including SUVs, Sedans, Sports Cars, Luxury Vehicles, Electric Cars, and Budget-Friendly options.">
+  <meta name="keywords" content="car categories, SUV, sedan, sports car, luxury car, electric vehicle">
+  <title>Car Categories | RadMotors</title>
+  <link rel="shortcut icon" href="Image/Rad.png" type="image/png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    /* Categories Page Specific Styles */
+    .categories-header {
+      background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-black) 100%);
+      color: var(--text-light);
+      padding: var(--spacing-2xl) 0;
+      text-align: center;
+    }
+    
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xl);
+    }
+    
+    @media (max-width: 768px) {
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .category-card {
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition-base);
+    }
+    
+    .category-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: var(--shadow-xl);
+    }
+    
+    .category-card.large {
+      grid-column: span 2;
+      aspect-ratio: 21/9;
+    }
+    
+    @media (max-width: 768px) {
+      .category-card.large {
+        grid-column: span 1;
+        aspect-ratio: 16/9;
+      }
+    }
+    
+    .category-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(10, 22, 40, 0.3) 0%, rgba(26, 26, 26, 0.8) 100%);
+      z-index: 1;
+      transition: background var(--transition-base);
+    }
+    
+    .category-card:hover::before {
+      background: linear-gradient(to bottom, rgba(10, 22, 40, 0.5) 0%, rgba(26, 26, 26, 0.9) 100%);
+    }
+    
+    .category-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+    
+    .category-card:hover img {
+      transform: scale(1.1);
+    }
+    
+    .category-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: var(--spacing-xl);
+      z-index: 2;
+      color: var(--text-light);
+    }
+    
+    .category-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--text-dark);
+      margin-bottom: var(--spacing-md);
+      transition: all var(--transition-base);
+    }
+    
+    .category-card:hover .category-icon {
+      transform: scale(1.1);
+    }
+    
+    .category-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-xs);
+      color: var(--text-light);
+    }
+    
+    .category-description {
+      font-size: 1.125rem;
+      opacity: 0.9;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .category-count {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      background: var(--primary-gold);
+      color: var(--text-dark);
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    
+    .category-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      margin-top: var(--spacing-md);
+      font-weight: 600;
+      color: var(--primary-gold);
+      transition: all var(--transition-fast);
+    }
+    
+    .category-cta:hover {
+      color: var(--text-light);
+      gap: var(--spacing-sm);
+    }
+    
+    /* Featured Category Section */
+    .featured-category {
+      background: var(--background-gray);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .featured-category-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-xl);
+      align-items: center;
+    }
+    
+    @media (max-width: 768px) {
+      .featured-category-content {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .featured-info h3 {
+      font-size: 2rem;
+      margin-bottom: var(--spacing-md);
+      color: var(--text-dark);
+    }
+    
+    .featured-info p {
+      font-size: 1.125rem;
+      margin-bottom: var(--spacing-lg);
+    }
+  </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <i class="fas fa-car-side text-gold"></i>
+        Rad<span>Motors</span>
+      </a>
+      
+      <button class="navbar-toggle" onclick="toggleNavbar()">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <ul class="navbar-nav">
+        <li><a href="index.html" class="navbar-link">Home</a></li>
+        <li><a href="cars.html" class="navbar-link">Available Cars</a></li>
+        <li><a href="categories.html" class="navbar-link">Categories</a></li>
+        <li><a href="about.html" class="navbar-link">About Us</a></li>
+        <li><a href="contact.html" class="navbar-link">Contact</a></li>
+        <li>
+          <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="fas fa-moon" id="theme-icon"></i>
+          </button>
+        </li>
+        <li><a href="https://wa.me/09061957126" class="btn btn-primary btn-sm">Chat Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="categories-header">
+    <div class="container">
+      <h1>Vehicle Categories</h1>
+      <p style="font-size: 1.125rem; opacity: 0.9; max-width: 600px; margin: 0 auto;">Explore our diverse collection of premium vehicles organized by category</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="section">
+    <div class="container">
+      <!-- Featured Category -->
+      <div class="featured-category">
+        <div class="featured-category-content">
+          <div class="featured-info">
+            <span class="car-badge" style="margin-bottom: var(--spacing-md);">Featured Category</span>
+            <h3>Luxury Sports Cars</h3>
+            <p>Experience the perfect blend of performance and elegance. Our luxury sports collection features the world's most coveted vehicles from renowned manufacturers.</p>
+            <a href="cars.html" class="btn btn-primary">View All Sports Cars <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div style="border-radius: var(--radius-lg); overflow: hidden;">
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" alt="Luxury Sports Cars" style="width: 100%;">
+          </div>
+        </div>
+      </div>
+      
+      <!-- Categories Grid -->
+      <div class="category-grid">
+        <!-- Luxury -->
+        <div class="category-card large" onclick="window.location.href='cars.html'">
+          <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1200&q=80" alt="Luxury Cars">
+          <div class="category-content">
+            <div class="category-icon">
+              <i class="fas fa-gem"></i>
+            </div>
+            <h2 class="category-title">Luxury Cars</h2>
+            <p class="category-description">Premium vehicles with exquisite craftsmanship and cutting-edge technology</p>
+            <div class="category-count">
+              <i class="fas fa-car"></i> 45 Vehicles
+            </div>
+            <div class="category-cta">
+              Explore Collection <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </div>
+        
+        <!-- SUV -->
+        <div class="category-card" onclick="window.location.href='cars.html'">
+          <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80" alt="SUVs">
+          <div class="category-content">
+            <div class="category-icon">
+              <i class="fas fa-truck-monster"></i>
+            </div>
+            <h3 class="category-title">SUVs</h3>
+            <p class="category-description">Versatile and powerful family vehicles</p>
+            <div class="category-count">
+              <i class="fas fa-car"></i> 38 Vehicles
+            </div>
+            <div class="category-cta">
+              View SUVs <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Sedan -->
+        <div class="category-card" onclick="window.location.href='cars.html'">
+          <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80" alt="Sedans">
+          <div class="category-content">
+            <div class="category-icon">
+              <i class="fas fa-car-side"></i>
+            </div>
+            <h3 class="category-title">Sedans</h3>
+            <p class="category-description">Elegant and comfortable daily drivers</p>
+            <div class="category-count">
+              <i class="fas fa-car"></i> 52 Vehicles
+            </div>
+            <div class="category-cta">
+              View Sedans <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Electric -->
+        <div class="category-card" onclick="window.location.href='cars.html'">
+          <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=800&q=80" alt="Electric Vehicles">
+          <div class="category-content">
+            <div class="category-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <h3 class="category-title">Electric Vehicles</h3>
+            <p class="category-description">Zero-emission, high-performance electric cars</p>
+            <div class="category-count">
+              <i class="fas fa-car"></i> 28 Vehicles
+            </div>
+            <div class="category-cta">
+              View EVs <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Sports -->
+        <div class="category-card" onclick="window.location.href='cars.html'">
+          <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80" alt="Sports Cars">
+          <div class="category-content">
+            <div class="category-icon">
+              <i class="fas fa-flag-checkered"></i>
+            </div>
+            <h3 class="category-title">Sports Cars</h3>
+            <p class="category-description">High-performance machines for enthusiasts</p>
+            <div class="category-count">
+              <i class="fas fa-car"></i> 35 Vehicles
+            </div>
+            <div class="category-cta">
+              View Sports Cars <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Budget -->
+        <div class="category-card" onclick="window.location.href='cars.html'">
+          <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80" alt="Budget Cars">
+          <div class="category-content">
+            <div class="category-icon">
+              <i class="fas fa-dollar-sign"></i>
+            </div>
+            <h3 class="category-title">Budget Friendly</h3>
+            <p class="category-description">Great value vehicles under $50,000</p>
+            <div class="category-count">
+              <i class="fas fa-car"></i> 42 Vehicles
+            </div>
+            <div class="category-cta">
+              View Budget Cars <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Call to Action -->
+      <div style="background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-black) 100%); color: var(--text-light); padding: var(--spacing-2xl); border-radius: var(--radius-lg); text-align: center; margin-top: var(--spacing-xl);">
+        <h2 style="margin-bottom: var(--spacing-md); color: var(--text-light);">Can't Find What You're Looking For?</h2>
+        <p style="font-size: 1.125rem; margin-bottom: var(--spacing-lg); max-width: 600px; margin-left: auto; margin-right: auto; opacity: 0.9;">Contact our team and we'll help you find your perfect vehicle from our extensive network of dealers.</p>
+        <div class="flex-center gap-md" style="flex-wrap: wrap;">
+          <a href="contact.html" class="btn btn-primary">Contact Us</a>
+          <a href="https://wa.me/09061957126" class="btn btn-whatsapp">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3 class="footer-title">RadMotors</h3>
+          <p>Your trusted partner for premium vehicles. Experience luxury car buying like never before.</p>
+          <div class="flex gap-sm mt-md">
+             <a href="facebook.com/radmotor" style="color: var(--text-light);"><i class="fab fa-facebook-f"></i></a>
+            <a href="instagram.com/radmotors" style="color: var(--text-light);"><i class="fab fa-instagram"></i></a>
+            <a href="#" style="color: var(--text-light);"><i class="fab fa-twitter"></i></a>
+            <a href="#" style="color: var(--text-light);"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cars.html">Available Cars</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Car Categories</h3>
+          <ul class="footer-links">
+            <li><a href="categories.html">Luxury Cars</a></li>
+            <li><a href="categories.html">Sports Cars</a></li>
+            <li><a href="categories.html">SUVs</a></li>
+            <li><a href="categories.html">Sedans</a></li>
+            <li><a href="categories.html">Electric Vehicles</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Contact Info</h3>
+          <ul class="footer-links">
+            <li><i class="fas fa-map-marker-alt"></i> 123 Auto Boulevard, Palo Alto, CA 94301</li>
+            <li><i class="fas fa-phone"></i> +234 906 195 7126</li>
+            <li><i class="fas fa-envelope"></i> radmotorsw@gmail.com</li>
+            <li><i class="fab fa-whatsapp"></i> +234 906 195 7126</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 RadMotors. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Buttons -->
+  <div class="floating-buttons">
+    <a href="https://wa.me/09061957126" class="floating-btn whatsapp-btn" target="_blank" title="Chat on WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <button class="floating-btn scroll-top-btn" onclick="scrollToTop()" title="Scroll to Top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    <button class="floating-btn scroll-bottom-btn" onclick="scrollToBottom()" title="Scroll to Bottom">
+      <i class="fas fa-arrow-down"></i>
+    </button>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Theme Toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById('theme-icon');
+      
+      if (html.getAttribute('data-theme') === 'light') {
+        html.setAttribute('data-theme', 'dark');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        html.setAttribute('data-theme', 'light');
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const icon = document.getElementById('theme-icon');
+      if (savedTheme === 'dark') {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      }
+    }
+    
+    // Navbar Toggle
+    function toggleNavbar() {
+      const nav = document.querySelector('.navbar-nav');
+      nav.classList.toggle('active');
+    }
+    
+    // Scroll to Top
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Scroll to Bottom
+    function scrollToBottom() {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+    
+    // Show/Hide Scroll Top Button
+    window.addEventListener('scroll', () => {
+      const scrollTopBtn = document.querySelector('.scroll-top-btn');
+      if (window.scrollY > 300) {
+        scrollTopBtn.style.opacity = '1';
+        scrollTopBtn.style.visibility = 'visible';
+      } else {
+        scrollTopBtn.style.opacity = '0';
+        scrollTopBtn.style.visibility = 'hidden';
+      }
+    });
+  </script>
+</body>
+</html>

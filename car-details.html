@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View detailed specifications of our premium vehicles. Includes image gallery, features, and finance calculator.">
+  <meta name="keywords" content="car details, vehicle specifications, finance calculator, luxury car features">
+  <title>BMW M4 Competition | RadMotors</title>
+   <link rel="icon" href="Image/RadLogo.png" type="image/png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    /* Car Details Page Specific Styles */
+    .details-header {
+      background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-black) 100%);
+      color: var(--text-light);
+      padding: var(--spacing-lg) 0;
+    }
+    
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      font-size: 0.875rem;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .breadcrumb a {
+      color: var(--text-gray);
+      transition: color var(--transition-fast);
+    }
+    
+    .breadcrumb a:hover {
+      color: var(--primary-gold);
+    }
+    
+    .breadcrumb span {
+      color: var(--primary-gold);
+    }
+    
+    /* Image Gallery */
+    .gallery-container {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .gallery-thumbs {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+    
+    .gallery-thumb {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      border: 2px solid transparent;
+    }
+    
+    .gallery-thumb:hover,
+    .gallery-thumb.active {
+      border-color: var(--primary-gold);
+      transform: scale(1.05);
+    }
+    
+    .gallery-main {
+      position: relative;
+      aspect-ratio: 16/10;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    
+    .gallery-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+      cursor: zoom-in;
+    }
+    
+    .gallery-main:hover img {
+      transform: scale(1.05);
+    }
+    
+    .gallery-zoom {
+      position: absolute;
+      bottom: var(--spacing-md);
+      right: var(--spacing-md);
+      background: var(--background-light);
+      color: var(--text-dark);
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+    }
+    
+    /* Car Info */
+    .car-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-xl);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    @media (max-width: 1024px) {
+      .gallery-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .gallery-thumbs {
+        flex-direction: row;
+        overflow-x: auto;
+      }
+      
+      .gallery-thumb {
+        width: 100px;
+        flex-shrink: 0;
+      }
+      
+      .car-info {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .car-title-section {
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .car-title {
+      font-size: 2.5rem;
+      margin-bottom: var(--spacing-xs);
+      color: var(--text-dark);
+    }
+    
+    .car-price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-gold);
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .car-badge {
+      display: inline-block;
+      background: var(--primary-gold);
+      color: var(--text-dark);
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    /* Specifications */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .spec-item {
+      background: var(--background-gray);
+      padding: var(--spacing-md);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+    
+    .spec-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: var(--text-dark);
+      flex-shrink: 0;
+    }
+    
+    .spec-details h4 {
+      font-size: 1rem;
+      margin-bottom: 2px;
+      color: var(--text-dark);
+    }
+    
+    .spec-details p {
+      font-size: 0.875rem;
+      color: var(--text-gray);
+      margin: 0;
+    }
+    
+    /* Features Section */
+    .features-section {
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-lg);
+    }
+    
+    @media (max-width: 768px) {
+      .specs-grid,
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .feature-category {
+      background: var(--background-light);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-light);
+    }
+    
+    .feature-category h4 {
+      color: var(--primary-gold);
+      margin-bottom: var(--spacing-md);
+      font-size: 1.25rem;
+    }
+    
+    .feature-list {
+      display: grid;
+      gap: var(--spacing-sm);
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      color: var(--text-gray);
+    }
+    
+    .feature-item i {
+      color: var(--success);
+    }
+    
+    /* Finance Calculator */
+    .finance-calculator {
+      background: var(--background-light);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-light);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .calculator-result {
+      background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-black) 100%);
+      color: var(--text-light);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      text-align: center;
+      margin-top: var(--spacing-lg);
+    }
+    
+    .monthly-payment {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--primary-gold);
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    /* Action Buttons */
+    .action-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    @media (max-width: 480px) {
+      .action-buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .action-buttons .btn {
+      padding: 16px 24px;
+      font-size: 1.125rem;
+    }
+    
+    /* Reasons to Buy */
+    .reasons-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-lg);
+    }
+    
+    @media (max-width: 768px) {
+      .reasons-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .reason-card {
+      background: var(--background-light);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-light);
+      transition: all var(--transition-base);
+    }
+    
+    .reason-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .reason-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      color: var(--text-dark);
+      margin: 0 auto var(--spacing-md);
+    }
+    
+    .reason-card h4 {
+      font-size: 1.125rem;
+      margin-bottom: var(--spacing-sm);
+      color: var(--text-dark);
+    }
+    
+    /* Image Zoom Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal.active {
+      display: flex;
+    }
+    
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: var(--radius-md);
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--background-light);
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-fast);
+    }
+    
+    .modal-close:hover {
+      transform: rotate(90deg);
+      background: var(--primary-gold);
+    }
+  </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <i class="fas fa-car-side text-gold"></i>
+        Premium<span>Auto</span>
+      </a>
+      
+      <button class="navbar-toggle" onclick="toggleNavbar()">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <ul class="navbar-nav">
+        <li><a href="index.html" class="navbar-link">Home</a></li>
+        <li><a href="cars.html" class="navbar-link">Available Cars</a></li>
+        <li><a href="categories.html" class="navbar-link">Categories</a></li>
+        <li><a href="about.html" class="navbar-link">About Us</a></li>
+        <li><a href="contact.html" class="navbar-link">Contact</a></li>
+        <li>
+          <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="fas fa-moon" id="theme-icon"></i>
+          </button>
+        </li>
+        <li><a href="https://wa.me/09061957126" class="btn btn-primary btn-sm">Chat Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="details-header">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i>
+        <a href="cars.html">Available Cars</a>
+        <i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i>
+        <span>BMW M4 Competition</span>
+      </div>
+      <h1>2024 BMW M4 Competition</h1>
+      <p style="opacity: 0.9; font-size: 1.125rem;">Presenting the pinnacle of performance engineering — the BMW M4 Competition. A premium sports sedan built for exhilarating power, precision handling, and motorsport-inspired technology.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="section">
+    <div class="container">
+      <div class="car-info">
+        <!-- Left Column - Images -->
+        <div>
+          <div class="gallery-container">
+            <div class="gallery-thumbs">
+              <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=400&q=80" alt="Front View" class="gallery-thumb active" onclick="changeMainImage(this)">
+              <img src="https://images.unsplash.com/photo-1556189250-72ba954cfc2b?auto=format&fit=crop&w=400&q=80" alt="Side View" class="gallery-thumb" onclick="changeMainImage(this)">
+              <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=400&q=80" alt="Rear View" class="gallery-thumb" onclick="changeMainImage(this)">
+              <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=400&q=80" alt="Interior" class="gallery-thumb" onclick="changeMainImage(this)">
+            </div>
+            <div class="gallery-main" onclick="openModal()">
+              <img id="mainImage" src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80" alt="BMW M4 Competition">
+              <div class="gallery-zoom">
+                <i class="fas fa-search-plus"></i> Click to zoom
+              </div>
+            </div>
+          </div>
+          
+          <!-- Action Buttons -->
+          <div class="action-buttons">
+            <a href="https://wa.me/09061957126?text=Hello!%20I'm%20interested%20in%20the%20BMW%20M4%20Competition%20-%20Price%3A%20%2489%2C900" class="btn btn-whatsapp" target="_blank" style="justify-content: center;">
+              <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
+            </a>
+            <a href="contact.html" class="btn btn-primary" style="justify-content: center;">
+              <i class="fas fa-calendar-alt"></i> Schedule Test Drive
+            </a>
+          </div>
+          
+          <!-- Quick Specifications -->
+          <div class="specs-grid">
+            <div class="spec-item">
+              <div class="spec-icon">
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+              <div class="spec-details">
+                <h4>Year</h4>
+                <p>2024</p>
+              </div>
+            </div>
+            
+            <div class="spec-item">
+              <div class="spec-icon">
+                <i class="fas fa-tachometer-alt"></i>
+              </div>
+              <div class="spec-details">
+                <h4>Mileage</h4>
+                <p>1,200 miles</p>
+              </div>
+            </div>
+            
+            <div class="spec-item">
+              <div class="spec-icon">
+                <i class="fas fa-cogs"></i>
+              </div>
+              <div class="spec-details">
+                <h4>Transmission</h4>
+                <p>Automatic</p>
+              </div>
+            </div>
+            
+            <div class="spec-item">
+              <div class="spec-icon">
+                <i class="fas fa-gas-pump"></i>
+              </div>
+              <div class="spec-details">
+                <h4>Fuel Type</h4>
+                <p>Petrol</p>
+              </div>
+            </div>
+            
+            <div class="spec-item">
+              <div class="spec-icon">
+                <i class="fas fa-palette"></i>
+              </div>
+              <div class="spec-details">
+                <h4>Exterior Color</h4>
+                <p>Black Sapphire</p>
+              </div>
+            </div>
+            
+            <div class="spec-item">
+              <div class="spec-icon">
+                <i class="fas fa-chair"></i>
+              </div>
+              <div class="spec-details">
+                <h4>Interior</h4>
+                <p>Merino Leather Black</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Column - Details -->
+        <div>
+          <div class="car-title-section">
+            <span class="car-badge">New Arrival</span>
+            <h2 class="car-title">BMW M4 Competition</h2>
+            <p class="car-price">$89,900</p>
+            <p style="color: var(--text-gray); font-size: 1.125rem;">The BMW M4 Competition represents the pinnacle of performance engineering, combining raw power with sophisticated luxury. This 2024 model delivers an exhilarating driving experience with its twin-turbocharged engine and advanced technology features.</p>
+          </div>
+          
+          <!-- Finance Calculator -->
+          <div class="finance-calculator">
+            <h3 style="margin-bottom: var(--spacing-lg);"><i class="fas fa-calculator text-gold"></i> Finance Calculator</h3>
+            
+            <div class="grid grid-2" style="gap: var(--spacing-md);">
+              <div>
+                <label class="form-label">Vehicle Price</label>
+                <input type="number" id="carPrice" class="form-input" value="89900" readonly>
+              </div>
+              
+              <div>
+                <label class="form-label">Down Payment ($)</label>
+                <input type="number" id="downPayment" class="form-input" value="20000" oninput="calculatePayment()">
+              </div>
+              
+              <div>
+                <label class="form-label">Interest Rate (%)</label>
+                <input type="number" id="interestRate" class="form-input" value="5.5" step="0.1" oninput="calculatePayment()">
+              </div>
+              
+              <div>
+                <label class="form-label">Loan Term (Months)</label>
+                <select id="loanTerm" class="form-select" onchange="calculatePayment()">
+                  <option value="24">24 Months</option>
+                  <option value="36">36 Months</option>
+                  <option value="48">48 Months</option>
+                  <option value="60" selected>60 Months</option>
+                  <option value="72">72 Months</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="calculator-result">
+              <p style="font-size: 1.125rem; margin-bottom: var(--spacing-xs);">Estimated Monthly Payment</p>
+              <div class="monthly-payment" id="monthlyPayment">$1,386</div>
+              <p style="font-size: 0.875rem; opacity: 0.8;">*Actual payments may vary based on credit approval</p>
+            </div>
+          </div>
+          
+          <!-- Contact Form -->
+          <div style="background: var(--background-light); border-radius: var(--radius-lg); padding: var(--spacing-xl); box-shadow: var(--shadow-md); border: 1px solid var(--border-light);">
+            <h3 style="margin-bottom: var(--spacing-lg);"><i class="fas fa-envelope text-gold"></i> Quick Enquiry</h3>
+            
+            <form onsubmit="submitEnquiry(event)">
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-input" required placeholder="John Doe">
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-input" required placeholder="09061957126">
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-input" required placeholder="radmotorsw@gmail.com">
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label">Message</label>
+                <textarea class="form-textarea" rows="4" placeholder="I'm interested in the BMW M4 Competition..."></textarea>
+              </div>
+              
+              <button type="submit" class="btn btn-primary" style="width: 100%;">
+                <i class="fas fa-paper-plane"></i> Send Enquiry
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Features Section -->
+      <div class="features-section">
+        <h2 style="text-align: center; margin-bottom: var(--spacing-xl);">Vehicle Features</h2>
+        
+        <div class="features-grid">
+          <div class="feature-category">
+            <h4><i class="fas fa-tachometer-alt"></i> Performance</h4>
+            <div class="feature-list">
+              <div class="feature-item"><i class="fas fa-check"></i> 503 HP Twin-Turbo Engine</div>
+              <div class="feature-item"><i class="fas fa-check"></i> 0-60 mph in 3.4 seconds</div>
+              <div class="feature-item"><i class="fas fa-check"></i> Top Speed: 180 mph</div>
+              <div class="feature-item"><i class="fas fa-check"></i> M xDrive All-Wheel Drive</div>
+              <div class="feature-item"><i class="fas fa-check"></i> 8-Speed M Steptronic Transmission</div>
+              <div class="feature-item"><i class="fas fa-check"></i> Adaptive M Suspension</div>
+            </div>
+          </div>
+          
+          <div class="feature-category">
+            <h4><i class="fas fa-couch"></i> Interior Features</h4>
+            <div class="feature-list">
+              <div class="feature-item"><i class="fas fa-check"></i> Merino Leather Upholstery</div>
+              <div class="feature-item"><i class="fas fa-check"></i> Heated & Ventilated Seats</div>
+              <div class="feature-item"><i class="fas fa-check"></i> BMW Live Cockpit Pro</div>
+              <div class="feature-item"><i class="fas fa-check"></i> Harman Kardon Sound System</div>
+              <div class="feature-item"><i class="fas fa-check"></i> Wireless Apple CarPlay</div>
+              <div class="feature-item"><i class="fas fa-check"></i> Ambient Interior Lighting</div>
+            </div>
+          </div>
+          
+          <div class="feature-category">
+            <h4><i class="fas fa-shield-alt"></i> Safety Features</h4>
+            <div class="feature-list">
+              <div class="feature-item"><i class="fas fa-check"></i> Adaptive Cruise Control</div>
+              <div class="feature-item"><i class="fas fa-check"></i> Lane Departure Warning</div>
+              <div class="feature-item"><i class="fas fa-check"></i> Blind Spot Detection</div>
+              <div class="feature-item"><i class="fas fa-check"></i> Forward Collision Warning</div>
+              <div class="feature-item"><i class="fas fa-check"></i> Automatic Emergency Braking</div>
+              <div class="feature-item"><i class="fas fa-check"></i> 360° Camera System</div>
+            </div>
+          </div>
+          
+          <div class="feature-category">
+            <h4><i class="fas fa-star"></i> Luxury & Comfort</h4>
+            <div class="feature-list">
+              <div class="feature-item"><i class="fas fa-check"></i> Panoramic Moonroof</div>
+              <div class="feature-item"><i class="fas fa-check"></i> Carbon Fiber Roof</div>
+              <div class="feature-item"><i class="fas fa-check"></i> M Sport Exhaust System</div>
+              <div class="feature-item"><i class="fas fa-check"></i> Keyless Entry & Start</div>
+              <div class="feature-item"><i class="fas fa-check"></i> Power Trunk</div>
+              <div class="feature-item"><i class="fas fa-check"></i> Remote Engine Start</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Reasons to Buy -->
+      <div style="margin-bottom: var(--spacing-xl);">
+        <h2 style="text-align: center; margin-bottom: var(--spacing-xl);">Why Buy This Car?</h2>
+        
+        <div class="reasons-grid">
+          <div class="reason-card">
+            <div class="reason-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <h4>Exceptional Performance</h4>
+            <p style="font-size: 0.875rem;">Experience thrilling acceleration and precise handling with BMW's legendary M performance engineering.</p>
+          </div>
+          
+          <div class="reason-card">
+            <div class="reason-icon">
+              <i class="fas fa-gem"></i>
+            </div>
+            <h4>Premium Quality</h4>
+            <p style="font-size: 0.875rem;">Crafted with the finest materials and attention to detail, this M4 offers unmatched luxury.</p>
+          </div>
+          
+          <div class="reason-card">
+            <div class="reason-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h4>Warranty Coverage</h4>
+            <p style="font-size: 0.875rem;">Comprehensive warranty package including 4-year/50,000-mile coverage for peace of mind.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Zoom Modal -->
+  <div class="modal" id="imageModal" onclick="closeModal()">
+    <button class="modal-close" onclick="closeModal()">
+      <i class="fas fa-times"></i>
+    </button>
+    <img id="modalImage" src="" alt="Zoomed Image">
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3 class="footer-title">RadMotors</h3>
+          <p>Your trusted partner for premium vehicles. Experience luxury car buying like never before.</p>
+          <div class="flex gap-sm mt-md">
+            <a href="facebook.com/radmotor" style="color: var(--text-light);"><i class="fab fa-facebook-f"></i></a>
+            <a href="instagram.com/radmotors" style="color: var(--text-light);"><i class="fab fa-instagram"></i></a>
+            <a href="#" style="color: var(--text-light);"><i class="fab fa-twitter"></i></a>
+            <a href="#" style="color: var(--text-light);"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cars.html">Available Cars</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Car Categories</h3>
+          <ul class="footer-links">
+            <li><a href="categories.html">Luxury Cars</a></li>
+            <li><a href="categories.html">Sports Cars</a></li>
+            <li><a href="categories.html">SUVs</a></li>
+            <li><a href="categories.html">Sedans</a></li>
+            <li><a href="categories.html">Electric Vehicles</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Contact Info</h3>
+          <ul class="footer-links">
+            <li><i class="fas fa-map-marker-alt"></i> Kuola Bus-stop  Akala Express, Ibadan </li>
+            <li><i class="fas fa-phone"></i> 09061957126</li>
+            <li><i class="fas fa-envelope"></i> radmotorsw@gmail.com</li>
+            <li><i class="fab fa-whatsapp"></i> 09061957126</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 RadMotors. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <div class="floating-buttons">
+    <a href="https://wa.me/09061957126" class="floating-btn whatsapp-btn" target="_blank" title="Chat on WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <button class="floating-btn scroll-top-btn" onclick="scrollToTop()" title="Scroll to Top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Car Details Database
+    const carDatabase = {
+      'bmw-m4': {
+        name: 'BMW M4 Competition',
+        year: '2024',
+        price: '$89,900',
+        badge: 'New Arrival',
+        mileage: '1,200 miles',
+        transmission: 'Automatic',
+        fuel: 'Petrol',
+        color: 'Black Sapphire',
+        interior: 'Merino Leather Black',
+        images: [
+          'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1556189250-72ba954cfc2b?auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=400&q=80'
+        ],
+        description: 'The BMW M4 Competition represents the pinnacle of performance engineering, combining raw power with sophisticated luxury. This 2024 model delivers an exhilarating driving experience with its twin-turbocharged engine and advanced technology features.',
+        performance: ['503 HP Twin-Turbo Engine', '0-60 mph in 3.4 seconds', 'Top Speed: 180 mph', 'M xDrive All-Wheel Drive', '8-Speed M Steptronic Transmission', 'Adaptive M Suspension'],
+        interior: ['Merino Leather Upholstery', 'Heated & Ventilated Seats', 'BMW Live Cockpit Pro', 'Harman Kardon Sound System', 'Wireless Apple CarPlay', 'Ambient Interior Lighting'],
+        safety: ['Adaptive Cruise Control', 'Lane Departure Warning', 'Blind Spot Detection', 'Forward Collision Warning', 'Automatic Emergency Braking', '360° Camera System'],
+        luxury: ['Panoramic Moonroof', 'Carbon Fiber Roof', 'M Sport Exhaust System', 'Keyless Entry & Start', 'Power Trunk', 'Remote Engine Start']
+      }
+    };
+
+    // Load car details from URL parameter
+    function loadCarDetails() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const carId = urlParams.get('car');
+      
+      if (carId && carDatabase[carId]) {
+        const car = carDatabase[carId];
+        updatePageContent(car);
+      }
+    }
+
+    // Update page with car details
+    function updatePageContent(car) {
+      // Update title and breadcrumb
+      document.title = `${car.year} ${car.name} | RadMotors`;
+      document.querySelector('.breadcrumb span').textContent = car.name;
+      document.querySelector('.details-header h1').textContent = `${car.year} ${car.name}`;
+      
+      // Update images
+      const thumbs = document.querySelectorAll('.gallery-thumb');
+      car.images.forEach((img, index) => {
+        if (thumbs[index]) {
+          thumbs[index].src = img;
+        }
+      });
+      
+      // Update main image
+      document.getElementById('mainImage').src = car.images[0].replace('w=400', 'w=1200');
+      document.getElementById('modalImage').src = car.images[0].replace('w=400', 'w=2000');
+      
+      // Update car info
+      document.querySelector('.car-badge').textContent = car.badge;
+      document.querySelector('.car-title').textContent = car.name;
+      document.querySelector('.car-price').textContent = car.price;
+      document.querySelector('.car-title-section > p:last-of-type').textContent = car.description;
+      
+      // Update WhatsApp link
+      const whatsappLink = document.querySelector('[href*="wa.me"]');
+      if (whatsappLink) {
+        whatsappLink.href = `https://wa.me/09061957126?text=Hello!%20I'm%20interested%20in%20the%20${car.year}%20${car.name}%20-%20Price:%20${car.price}`;
+      }
+      
+      // Update specifications
+      const specs = [
+        { icon: 'fa-calendar-alt', label: 'Year', value: car.year },
+        { icon: 'fa-tachometer-alt', label: 'Mileage', value: car.mileage },
+        { icon: 'fa-cogs', label: 'Transmission', value: car.transmission },
+        { icon: 'fa-gas-pump', label: 'Fuel Type', value: car.fuel },
+        { icon: 'fa-palette', label: 'Exterior Color', value: car.color },
+        { icon: 'fa-chair', label: 'Interior', value: car.interior }
+      ];
+      
+      const specItems = document.querySelectorAll('.spec-item');
+      specs.forEach((spec, index) => {
+        if (specItems[index]) {
+          specItems[index].querySelector('.spec-details h4').textContent = spec.label;
+          specItems[index].querySelector('.spec-details p').textContent = spec.value;
+        }
+      });
+      
+      // Update features
+      updateFeatureList('.feature-category:nth-child(1) .feature-list', car.performance);
+      updateFeatureList('.feature-category:nth-child(2) .feature-list', car.interior);
+      updateFeatureList('.feature-category:nth-child(3) .feature-list', car.safety);
+      updateFeatureList('.feature-category:nth-child(4) .feature-list', car.luxury);
+    }
+
+    function updateFeatureList(selector, features) {
+      const container = document.querySelector(selector);
+      if (container) {
+        container.innerHTML = '';
+        features.forEach(feature => {
+          const item = document.createElement('div');
+          item.className = 'feature-item';
+          item.innerHTML = `<i class="fas fa-check"></i> ${feature}`;
+          container.appendChild(item);
+        });
+      }
+    }
+
+    // Load car details on page load
+    window.addEventListener('DOMContentLoaded', loadCarDetails);
+
+    // Theme Toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById('theme-icon');
+      
+      if (html.getAttribute('data-theme') === 'light') {
+        html.setAttribute('data-theme', 'dark');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        html.setAttribute('data-theme', 'light');
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const icon = document.getElementById('theme-icon');
+      if (savedTheme === 'dark') {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      }
+    }
+    
+    // Navbar Toggle
+    function toggleNavbar() {
+      const nav = document.querySelector('.navbar-nav');
+      nav.classList.toggle('active');
+    }
+    
+    // Image Gallery
+    function changeMainImage(thumb) {
+      const mainImage = document.getElementById('mainImage');
+      mainImage.src = thumb.src.replace('w=400', 'w=1200');
+      
+      // Update active state
+      document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+    }
+    
+    // Modal
+    function openModal() {
+      const mainImage = document.getElementById('mainImage');
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      
+      modalImage.src = mainImage.src.replace('w=1200', 'w=2000');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+    
+    // Finance Calculator
+    function calculatePayment() {
+      const carPrice = parseFloat(document.getElementById('carPrice').value) || 0;
+      const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
+      const interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
+      const loanTerm = parseInt(document.getElementById('loanTerm').value) || 60;
+      
+      const principal = carPrice - downPayment;
+      const monthlyRate = interestRate / 100 / 12;
+      
+      let monthlyPayment;
+      
+      if (monthlyRate === 0) {
+        monthlyPayment = principal / loanTerm;
+      } else {
+        monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, loanTerm)) / (Math.pow(1 + monthlyRate, loanTerm) - 1);
+      }
+      
+      if (monthlyPayment > 0 && !isNaN(monthlyPayment)) {
+        document.getElementById('monthlyPayment').textContent = '$' + Math.round(monthlyPayment).toLocaleString();
+      }
+    }
+    
+    // Initialize calculator
+    calculatePayment();
+    
+    // Submit Enquiry
+    function submitEnquiry(event) {
+      event.preventDefault();
+      alert('Thank you for your enquiry! Our team will contact you shortly.');
+      event.target.reset();
+    }
+    
+    // Scroll to Top
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Show/Hide Scroll Top Button
+    window.addEventListener('scroll', () => {
+      const scrollTopBtn = document.querySelector('.scroll-top-btn');
+      if (window.scrollY > 300) {
+        scrollTopBtn.style.opacity = '1';
+        scrollTopBtn.style.visibility = 'visible';
+      } else {
+        scrollTopBtn.style.opacity = '0';
+        scrollTopBtn.style.visibility = 'hidden';
+      }
+    });
+  </script>
+</body>
+</html>

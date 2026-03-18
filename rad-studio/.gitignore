@@ -1,0 +1,12 @@
+# Sanity Studio
+node_modules/
+.sanity/
+dist/
+.env
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

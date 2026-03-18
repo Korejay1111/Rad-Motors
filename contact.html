@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact RadMotors - Get in touch with our team. Visit our dealership, call us, or send a message.">
+  <meta name="keywords" content="contact us, car dealer contact, visit dealership, customer support">
+  <title>Contact Us | RadMotors</title>
+   <link rel="shortcut icon" href="Image/Rad.png" type="image/png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    /* Contact Page Specific Styles */
+    .contact-header {
+      background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-black) 100%);
+      color: var(--text-light);
+      padding: var(--spacing-2xl) 0;
+      text-align: center;
+    }
+    
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-2xl);
+    }
+    
+    @media (max-width: 1024px) {
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Contact Info Cards */
+    .contact-info-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .info-card {
+      background: var(--background-light);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-light);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-md);
+      transition: all var(--transition-base);
+    }
+    
+    .info-card:hover {
+      transform: translateX(8px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .info-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--text-dark);
+      flex-shrink: 0;
+    }
+    
+    .info-content h4 {
+      font-size: 1.125rem;
+      margin-bottom: var(--spacing-xs);
+      color: var(--text-dark);
+    }
+    
+    .info-content p {
+      font-size: 1rem;
+      color: var(--text-gray);
+      margin: 0;
+    }
+    
+    .info-content a {
+      color: var(--primary-gold);
+      transition: color var(--transition-fast);
+    }
+    
+    .info-content a:hover {
+      color: var(--primary-gold-light);
+    }
+    
+    /* Contact Form */
+    .contact-form-card {
+      background: var(--background-light);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-light);
+    }
+    
+    .contact-form-card h3 {
+      font-size: 1.75rem;
+      margin-bottom: var(--spacing-md);
+      color: var(--text-dark);
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+    }
+    
+    @media (max-width: 480px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Map Section */
+    .map-section {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      margin-bottom: var(--spacing-xl);
+      aspect-ratio: 21/9;
+    }
+    
+    @media (max-width: 768px) {
+      .map-section {
+        aspect-ratio: 16/9;
+      }
+    }
+    
+    .map-section iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    /* Quick Actions */
+    .quick-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    @media (max-width: 480px) {
+      .quick-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .quick-action-card {
+      background: var(--background-gray);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      text-align: center;
+      transition: all var(--transition-base);
+      border: 1px solid var(--border-light);
+    }
+    
+    .quick-action-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-black) 100%);
+    }
+    
+    .quick-action-card:hover h4,
+    .quick-action-card:hover p {
+      color: var(--text-light);
+    }
+    
+    .quick-action-card:hover .action-icon {
+      background: var(--primary-gold);
+      color: var(--text-dark);
+    }
+    
+    .action-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--primary-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--text-dark);
+      margin: 0 auto var(--spacing-md);
+      transition: all var(--transition-base);
+    }
+    
+    .quick-action-card h4 {
+      font-size: 1.125rem;
+      margin-bottom: var(--spacing-xs);
+      color: var(--text-dark);
+    }
+    
+    .quick-action-card p {
+      font-size: 0.875rem;
+      color: var(--text-gray);
+      margin: 0;
+    }
+    
+    /* Business Hours */
+    .business-hours {
+      background: var(--background-light);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-light);
+    }
+    
+    .business-hours h3 {
+      font-size: 1.25rem;
+      margin-bottom: var(--spacing-md);
+      color: var(--text-dark);
+    }
+    
+    .hours-list {
+      display: grid;
+      gap: var(--spacing-sm);
+    }
+    
+    .hours-item {
+      display: flex;
+      justify-content: space-between;
+      padding: var(--spacing-sm) 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    
+    .hours-item:last-child {
+      border-bottom: none;
+    }
+    
+    .hours-day {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+    
+    .hours-time {
+      color: var(--text-gray);
+    }
+    
+    .hours-item.today .hours-day {
+      color: var(--primary-gold);
+    }
+  </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <!-- <i class="fas fa-car-side text-gold"></i> -->
+         <img src="Image/Radlog.png" alt="Logo" style="width: 150px; height: 50px; margin-right: 8px;">
+        <!-- Rad<span>Motors</span> -->
+      </a>
+      
+      <button class="navbar-toggle" onclick="toggleNavbar()">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <ul class="navbar-nav">
+        <li><a href="index.html" class="navbar-link">Home</a></li>
+        <li><a href="cars.html" class="navbar-link">Available Cars</a></li>
+        <!-- <li><a href="categories.html" class="navbar-link">Categories</a></li> -->
+        <li><a href="about.html" class="navbar-link">About Us</a></li>
+        <li><a href="contact.html" class="navbar-link">Contact</a></li>
+        <li>
+          <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="fas fa-moon" id="theme-icon"></i>
+          </button>
+        </li>
+        <li><a href="https://wa.me/09061957126" class="btn btn-primary btn-sm">Chat Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="contact-header">
+    <div class="container">
+      <h1>Get In Touch</h1>
+      <p style="font-size: 1.125rem; opacity: 0.9; max-width: 600px; margin: 0 auto;">We'd love to hear from you. Reach out to start your journey toward your dream car.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="section">
+    <div class="container">
+      <div class="contact-container">
+        <!-- Left Column - Contact Info & Form -->
+        <div>
+          <!-- Contact Info Cards -->
+          <div class="contact-info-grid">
+            <div class="info-card">
+              <div class="info-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div class="info-content">
+                <h4>Visit Our Dealership</h4>
+                <p>Kuola Akala Express<br>Ibadan, Nigeria</p>
+              </div>
+            </div>
+            
+            <div class="info-card">
+              <div class="info-icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div class="info-content">
+                <h4>Call Us</h4>
+                <p><a href="tel:+2349061957126">+234 906 195 7126</a></p>
+                <p style="font-size: 0.875rem; margin-top: 4px;">Mon - Sat, 9AM - 7PM</p>
+              </div>
+            </div>
+            
+            <div class="info-card">
+              <div class="info-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="info-content">
+                <h4>Email Us</h4>
+                <p><a href="mailto:radmotorsw@gmail.com">radmotorsw@gmail.com</a></p>
+                <p style="font-size: 0.875rem; margin-top: 4px;">We respond within 24 hours</p>
+              </div>
+            </div>
+            
+            <div class="info-card">
+              <div class="info-icon">
+                <i class="fab fa-whatsapp"></i>
+              </div>
+              <div class="info-content">
+                <h4>WhatsApp</h4>
+                <p><a href="https://wa.me/09061957126">+234 906 195 7126</a></p>
+                <p style="font-size: 0.875rem; margin-top: 4px;">Instant messaging support</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Contact Form -->
+          <div class="contact-form-card">
+            <h3>Send Us a Message</h3>
+            <form onsubmit="submitContactForm(event)">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">First Name *</label>
+                  <input type="text" class="form-input" required placeholder="First name">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Last Name *</label>
+                  <input type="text" class="form-input" required placeholder="Last Name">
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Phone Number *</label>
+                  <input type="tel" class="form-input" required placeholder="xxx-xxxx-xxx">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email Address *</label>
+                  <input type="email" class="form-input" required placeholder="radmotorsw@gmail.com">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label">Subject</label>
+                <select class="form-select">
+                  <option value="">Select a subject</option>
+                  <option value="sales">Sales Inquiry</option>
+                  <option value="test-drive">Schedule Test Drive</option>
+                  <option value="financing">Financing Questions</option>
+                  <option value="trade-in">Trade-In Valuation</option>
+                  <option value="service">Service & Maintenance</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label">Message *</label>
+                <textarea class="form-textarea" rows="5" required placeholder="Tell us how we can help you..."></textarea>
+              </div>
+              
+              <button type="submit" class="btn btn-primary" style="width: 100%;">
+                <i class="fas fa-paper-plane"></i> Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+        
+        <!-- Right Column - Map & Quick Actions -->
+        <div>
+          <!-- Quick Actions -->
+          <div class="quick-actions">
+            <div class="quick-action-card" onclick="window.open('https://wa.me/09061957126', '_blank')">
+              <div class="action-icon">
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+              <h4>Schedule Test Drive</h4>
+              <p>Book your test drive today</p>
+            </div>
+            
+            <div class="quick-action-card" onclick="window.open('https://wa.me/09061957126', '_blank')">
+              <div class="action-icon">
+                <i class="fab fa-whatsapp"></i>
+              </div>
+              <h4>Chat on WhatsApp</h4>
+              <p>Get instant responses</p>
+            </div>
+          </div>
+          
+          <!-- Business Hours -->
+          <div class="business-hours">
+            <h3><i class="fas fa-clock text-gold"></i> Business Hours</h3>
+            <div class="hours-list">
+              <div class="hours-item">
+                <span class="hours-day">Monday - Friday</span>
+                <span class="hours-time">8:00 AM - 6:00 PM</span>
+              </div>
+              <div class="hours-item">
+                <span class="hours-day">Saturday</span>
+                <span class="hours-time">8:00 AM - 6:00 PM</span>
+              </div>
+              <div class="hours-item">
+                <span class="hours-day">Sunday</span>
+                <span class="hours-time">9:00 AM - 2:00 PM</span>
+              </div>
+            </div>
+            <p style="margin-top: var(--spacing-md); font-size: 0.875rem; color: var(--text-gray);">
+              <i class="fas fa-info-circle"></i> Test drives available during business hours by appointment
+            </p>
+          </div>
+          
+          <!-- Map -->
+          <div class="map-section" style="margin-top: var(--spacing-xl);">
+           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.9471162189157!2d3.8234233748139825!3d7.3598251926492075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10398d0c32bbd5ef%3A0xbae5eb4f8fa80d63!2sOJ%20VENTURES.%20KUOLA%20BUS%20STOP%20AKALA%20EXPRESS%20IBADAN!5e0!3m2!1sen!2sng!4v1772627692405!5m2!1sen!2sng" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          
+          <!-- Social Media -->
+          <div style="background: var(--background-light); border-radius: var(--radius-lg); padding: var(--spacing-xl); box-shadow: var(--shadow-md); border: 1px solid var(--border-light); text-align: center;">
+            <h3 style="margin-bottom: var(--spacing-md);"><i class="fas fa-share-alt text-gold"></i> Follow Us</h3>
+            <p style="margin-bottom: var(--spacing-lg);">Stay connected with us on social media for latest updates and exclusive offers</p>
+            <div class="flex-center gap-md">
+              <a href="#" style="width: 50px; height: 50px; background: #1877F2; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem;">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" style="width: 50px; height: 50px; background: #E4405F; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem;">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" style="width: 50px; height: 50px; background: #1DA1F2; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem;">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" style="width: 50px; height: 50px; background: #FF0000; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem;">
+                <i class="fab fa-youtube"></i>
+              </a>
+              <a href="#" style="width: 50px; height: 50px; background: #0077B5; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem;">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3 class="footer-title">RadMotors</h3>
+          <p>Your trusted partner for premium vehicles. Experience luxury car buying like never before.</p>
+          <div class="flex gap-sm mt-md">
+             <a href="https://www.facebook.com/share/1EBYvyAUp6/?mibextid=wwXIfr" style="color: var(--text-light);"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/radmotors0?igsh=MnVicGtydXU5OXF0&utm_source=qr" style="color: var(--text-light);"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@radmotors0?_r=1&_t=ZS-94etfYcs5mm" style="color: var(--text-light);"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cars.html">Available Cars</a></li>
+            <!-- <li><a href="categories.html">Categories</a></li> -->
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Car Categories</h3>
+          <ul class="footer-links">
+            <li><a href="cars.html">Luxury Cars</a></li>
+            <li><a href="cars.html">Sports Cars</a></li>
+            <li><a href="cars.html">SUVs</a></li>
+            <li><a href="cars.html">Sedans</a></li>
+            <li><a href="cars.html">Electric Vehicles</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Contact Info</h3>
+          <ul class="footer-links">
+            <li><i class="fas fa-map-marker-alt"></i> Kuola Bus-stop  Akala Express, Ibadan </li>
+            <li><i class="fas fa-phone"></i> 09061957126</li>
+            <li><i class="fas fa-envelope"></i> Radmotorsw@gmail.com</li>
+            <li><i class="fab fa-whatsapp"></i> 09061957126</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 RadMotors. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  
+
+  <!-- JavaScript -->
+  <script>
+    // Theme Toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById('theme-icon');
+      
+      if (html.getAttribute('data-theme') === 'light') {
+        html.setAttribute('data-theme', 'dark');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        html.setAttribute('data-theme', 'light');
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const icon = document.getElementById('theme-icon');
+      if (savedTheme === 'dark') {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      }
+    }
+    
+    // Navbar Toggle
+    function toggleNavbar() {
+      const nav = document.querySelector('.navbar-nav');
+      nav.classList.toggle('active');
+    }
+    
+    // Submit Contact Form
+    function submitContactForm(event) {
+      event.preventDefault();
+      alert('Thank you for your message! Our team will get back to you within 24 hours.');
+      event.target.reset();
+    }
+    
+    // Scroll to Top
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Scroll to Bottom
+    function scrollToBottom() {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+    
+    // Show/Hide Scroll Top Button
+    window.addEventListener('scroll', () => {
+      const scrollTopBtn = document.querySelector('.scroll-top-btn');
+      if (window.scrollY > 300) {
+        scrollTopBtn.style.opacity = '1';
+        scrollTopBtn.style.visibility = 'visible';
+      } else {
+        scrollTopBtn.style.opacity = '0';
+        scrollTopBtn.style.visibility = 'hidden';
+      }
+    });
+  </script>
+</body>
+</html>

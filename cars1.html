@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse our extensive collection of premium vehicles. Filter by price, brand, year, and more.">
+  <meta name="keywords" content="car inventory, available cars, car search, luxury cars for sale">
+  <title>Available Cars | RadMotors</title>
+   <link rel="icon" href="Image/RadLogo.png" type="image/png">
+   <link rel="stylesheet" href="style.css">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    /* Cars Page Specific Styles */
+    .cars-header {
+      background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-black) 100%);
+      color: var(--text-light);
+      padding: var(--spacing-2xl) 0;
+      text-align: center;
+    }
+    
+    .filters-section {
+      background: var(--background-light);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      margin-bottom: var(--spacing-xl);
+      border: 1px solid var(--border-light);
+    }
+    
+    .filters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-md);
+    }
+    
+    .search-box {
+      position: relative;
+    }
+    
+    
+    .search-box input {
+      padding-left: 40px;
+    }
+    
+    .search-box i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-gray);
+    }
+    
+    .filter-reset {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+    
+    .cars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: var(--spacing-lg);
+    }
+    
+    @media (max-width: 768px) {
+      .cars-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .car-card {
+      background: var(--background-light);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition-base);
+      border: 1px solid var(--border-light);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .car-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+    }
+    
+    .car-card-image {
+      position: relative;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+    }
+    
+    .car-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+    
+    .car-card:hover .car-card-image img {
+      transform: scale(1.08);
+    }
+    
+    .car-badge {
+      position: absolute;
+      top: var(--spacing-sm);
+      right: var(--spacing-sm);
+      background: var(--primary-gold);
+      color: var(--text-dark);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    
+    .car-favorite {
+      position: absolute;
+      top: var(--spacing-sm);
+      left: var(--spacing-sm);
+      width: 40px;
+      height: 40px;
+      background: var(--background-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      border: 1px solid var(--border-light);
+    }
+    
+    .car-favorite:hover {
+      background: var(--primary-gold);
+      border-color: var(--primary-gold);
+    }
+    
+    .car-favorite.active {
+      color: #EF4444;
+    }
+    
+    .car-card-content {
+      padding: var(--spacing-md);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .car-card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-xs);
+      color: var(--text-white);
+    }
+    
+    .car-card-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-gold);
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .car-card-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .car-spec {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.875rem;
+      color: var(--text-gray);
+      background: var(--background-gray);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+    }
+    
+    .car-spec i {
+      color: var(--primary-gold);
+    }
+    
+    .car-card-actions {
+      margin-top: auto;
+      display: flex;
+      gap: var(--spacing-sm);
+    }
+    
+    .car-card-actions .btn {
+      flex: 1;
+    }
+    
+    .no-results {
+      text-align: center;
+      padding: var(--spacing-2xl);
+      color: var(--text-gray);
+    }
+    
+    .no-results i {
+      font-size: 4rem;
+      margin-bottom: var(--spacing-md);
+      color: var(--primary-gold);
+    }
+    
+    .results-count {
+      background: var(--primary-navy);
+      color: var(--text-light);
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      display: inline-block;
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    /* Car Details Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      animation: fadeIn 0.3s ease-in;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .modal-content {
+      background-color: var(--background-light);
+      margin: auto;
+      padding: 0;
+      width: 90%;
+      max-width: 900px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+      animation: slideIn 0.3s ease-out;
+      top: 50%;
+      position: relative;
+      transform: translateY(-50%);
+      margin-top: 2rem;
+    }
+    
+    @keyframes slideIn {
+      from {
+        transform: translateY(-50vh);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(-50%);
+        opacity: 1;
+      }
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-lg);
+      background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-black) 100%);
+      color: var(--text-light);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    
+    .modal-header h2 {
+      margin: 0;
+      font-size: 1.75rem;
+    }
+    
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 2rem;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-base);
+    }
+    
+    .modal-close:hover {
+      transform: rotate(90deg);
+    }
+    
+    .modal-body {
+      padding: var(--spacing-lg);
+    }
+    
+    .car-images-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .car-image-item {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      aspect-ratio: 1;
+      box-shadow: var(--shadow-md);
+    }
+    
+    .car-image-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .car-details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .detail-item {
+      background: var(--background-gray);
+      padding: var(--spacing-md);
+      border-radius: var(--radius-md);
+      border-left: 4px solid var(--primary-gold);
+    }
+    
+    .detail-item label {
+      display: block;
+      font-size: 0.875rem;
+      color: var(--text-gray);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .detail-item value {
+      display: block;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    
+    .car-features {
+      background: var(--background-gray);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .car-features h3 {
+      margin-top: 0;
+      color: var(--primary-navy);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .features-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: var(--spacing-md);
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-dark);
+    }
+    
+    .feature-item i {
+      color: var(--primary-gold);
+      font-size: 1.25rem;
+    }
+    
+    .modal-actions {
+      display: flex;
+      gap: var(--spacing-md);
+      padding: var(--spacing-lg);
+      border-top: 1px solid var(--border-light);
+      justify-content: center;
+    }
+    
+    .modal-actions .btn {
+      flex: 1;
+      max-width: 250px;
+    }
+    
+    @media (max-width: 768px) {
+      .modal-content {
+        width: 95%;
+        max-height: 95vh;
+      }
+      
+      .modal-header {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        text-align: center;
+      }
+      
+      .modal-header h2 {
+        font-size: 1.5rem;
+      }
+      
+      .car-images-gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <i class="fas fa-car-side text-gold"></i>
+        Rad<span>Motors</span>
+      </a>
+      
+      <button class="navbar-toggle" onclick="toggleNavbar()">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <ul class="navbar-nav">
+        <li><a href="index.html" class="navbar-link">Home</a></li>
+        <li><a href="cars.html" class="navbar-link">Available Cars</a></li>
+        <li><a href="categories.html" class="navbar-link">Categories</a></li>
+        <li><a href="about.html" class="navbar-link">About Us</a></li>
+        <li><a href="contact.html" class="navbar-link">Contact</a></li>
+        <li>
+          <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="fas fa-moon" id="theme-icon"></i>
+          </button>
+        </li>
+        <li><a href="https://wa.me/09061957126" class="btn btn-primary btn-sm">Chat Now</a></li>
+      </ul>
+    </div>
+  </nav>
+   <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scroll Buttons -->
+    <button class="scroll-top" id="scrollTop" title="Scroll to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <button class="scroll-bottom" id="scrollBottom" title="Scroll to Bottom">
+        <i class="fas fa-arrow-down"></i>
+    </button>
+
+  <!-- Page Header -->
+  <section class="cars-header">
+    <div class="container">
+      <h1 style="color: var(--primary-gold);">Available Cars</h1>
+      <p style="font-size: 1.125rem; opacity: 0.9;">Find your perfect vehicle from our premium collection</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="section">
+    <div class="container">
+      <!-- Filters Section -->
+      <div class="filters-section">
+        <div class="filters-grid">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" class="form-input" placeholder="Search cars..." onkeyup="filterCars()">
+          </div>
+          
+          <div class="form-group" style="margin: 0;">
+            <select id="priceFilter" class="form-select" onchange="filterCars()">
+              <option value="">All Prices</option>
+              <option value="0-20000000">Under ₦20,000,000</option>
+              <option value="20000000-60000000">₦20,000,000 - ₦60,000,000</option>
+              <option value="60000000-100000000">₦60,000,000 - ₦100,000,000</option>
+              <option value="100000000-999999999">₦100,000,000+</option>
+            </select>
+          </div>
+          
+          <div class="form-group" style="margin: 0;">
+            <select id="brandFilter" class="form-select" onchange="filterCars()">
+              <option value="">All Brands</option>
+              <option value="Toyota">Toyota</option>
+              <option value="Lexus">Lexus</option>
+              <option value="Mercedes">Mercedes</option>
+              <option value="Audi">Audi</option>
+              <option value="Tesla">Tesla</option>
+              <option value="Jaguar">Jaguar</option>
+            </select>
+          </div>
+          
+          <div class="form-group" style="margin: 0;">
+            <select id="yearFilter" class="form-select" onchange="filterCars()">
+              <option value="">All Years</option>
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+              <option value="2022">2022</option>
+              <option value="2021">2021</option>
+              <option value="2020">2020</option>
+            </select>
+          </div>
+          
+          <div class="form-group" style="margin: 0;">
+            <select id="fuelFilter" class="form-select" onchange="filterCars()">
+              <option value="">All Fuel Types</option>
+              <option value="Petrol">Petrol</option>
+              <option value="Diesel">Diesel</option>
+              <option value="Electric">Electric</option>
+              <option value="Hybrid">Hybrid</option>
+            </select>
+          </div>
+          
+                        <div class="filter-group">
+                            <label>Sort By</label>
+                            <select id="sortFilter">
+                                <option value="default">Default</option>
+                                <option value="price-low">Price Low - High</option>
+                                <option value="price-high">Price High - Low</option>
+                                <option value="newest">Newest First</option>
+                            </select>
+                        </div>
+          <div class="filter-reset">
+            <button class="btn btn-secondary" onclick="resetFilters()">
+              <i class="fas fa-redo"></i> Reset
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Results Count -->
+      <div style="text-align: center;">
+        <span class="results-count" id="resultsCount">Showing 7 cars</span>
+      </div>
+      
+      <!-- Cars Grid -->
+      <div class="cars-grid" id="carsGrid">
+        <!-- Car Card 1 -->
+        <div class="car-card" data-brand="Lexus" data-price="22500000" data-year="2010" data-fuel="Petrol">
+          <div class="car-card-image">
+            <span class="car-badge">Petrol</span>
+            <div class="car-favorite" onclick="toggleFavorite(this)">
+              <i class="far fa-heart"></i>
+            </div>
+            <img src="Image/2010 Lexus RX 350/1.jpeg" alt="Lexus RX 350">
+          </div>
+          <div class="car-card-content">
+            <h3 class="car-card-title">2010 Lexus RX 350</h3>
+            <p class="car-card-price">₦22,500,000</p>
+            <div class="car-card-specs">
+              <span class="car-spec"><i class="fas fa-calendar"></i> 2010</span>
+              <span class="car-spec"><i class="fas fa-tachometer-alt"></i> 2,500 mi</span>
+              <span class="car-spec"><i class="fas fa-gas-pump"></i> Petrol</span>
+              <span class="car-spec"><i class="fas fa-cog"></i> Automatic</span>
+            </div>
+                        <div class="car-card-actions">
+              <button class="btn btn-primary" onclick="openCarModal(event)">View Details</button>
+              <a href="https://wa.me/09061957126?text=Hi!%20I'm%20interested%20in%20the%20Lexus%20RX%20350" class="btn btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Car Card 2 -->
+        <div class="car-card" data-brand="Toyota" data-price="57000000" data-year="2024" data-fuel="Petrol">
+          <div class="car-card-image">
+            <span class="car-badge">Petrol</span>
+            <div class="car-favorite" onclick="toggleFavorite(this)">
+              <i class="far fa-heart"></i>
+            </div>
+            <img src="Image/2024 Toyota RAV4 LE/1.jpeg" alt="2024 Toyota RAV4 LE">
+          </div>
+          <div class="car-card-content">
+           <h3 class="car-card-title">Toyota RAV4 LE</h3>
+            <p class="car-card-price">₦57,000,000</p>
+            <div class="car-card-specs">
+              <span class="car-spec"><i class="fas fa-calendar"></i> 2024</span>
+              <span class="car-spec"><i class="fas fa-tachometer-alt"></i> 1,200 mi</span>
+              <span class="car-spec"><i class="fas fa-gas-pump"></i> Petrol</span>
+              <span class="car-spec"><i class="fas fa-cog"></i> Automatic</span>
+            </div>
+                        <div class="car-card-actions">
+              <button class="btn btn-primary" onclick="openCarModal(event)">View Details</button>
+              <a href="https://wa.me/09061957126?text=Hi!%20I'm%20interested%20in%20the%20Lexus%20RX%20350" class="btn btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Car Card 3 -->
+        <div class="car-card" data-brand="Lexus" data-price="62000000" data-year="2023" data-fuel="Petrol">
+          <div class="car-card-image">
+            <span class="car-badge">Petrol</span>
+            <div class="car-favorite" onclick="toggleFavorite(this)">
+              <i class="far fa-heart"></i>
+            </div>
+            <img src="Image/2023 Lexus RX 350 F‑Sport/1.jpeg" alt="Lexus RX 350 F‑Sport">
+          </div>
+          <div class="car-card-content">
+            <h3 class="car-card-title">Lexus RX 350 F‑Sport</h3>
+            <p class="car-card-price">₦62,000,000</p>
+            <div class="car-card-specs">
+              <span class="car-spec"><i class="fas fa-calendar"></i> 2023</span>
+              <span class="car-spec"><i class="fas fa-tachometer-alt"></i> 800 mi</span>
+              <span class="car-spec"><i class="fas fa-gas-pump"></i> Petrol</span>
+              <span class="car-spec"><i class="fas fa-cog"></i> Automatic</span>
+            </div>
+            <div class="car-card-actions">
+              <a href="car-details.html" class="btn btn-primary">View Details</a>
+              <a href="https://wa.me/09061957126?text=Hi!%20I'm%20interested%20in%20the%20Lexus%20RX%20350%20F‑Sport" class="btn btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Car Card 4 -->
+        <div class="car-card" data-brand="Toyota" data-price="15000000" data-year="2015" data-fuel="Petrol">
+          <div class="car-card-image">
+            <span class="car-badge">Petrol</span>
+            <div class="car-favorite" onclick="toggleFavorite(this)">
+              <i class="far fa-heart"></i>
+            </div>
+           <img src="Image/2015 Toyota Avalon XLE/1.jpeg" alt="2015 Toyota Avalon XLE">
+          </div>
+          <div class="car-card-content">
+            <h3 class="car-card-title">2015 Toyota Avalon XLE</h3>
+            <p class="car-card-price">₦15,000,000</p>
+            <div class="car-card-specs">
+              <span class="car-spec"><i class="fas fa-calendar"></i> 2015</span>
+              <span class="car-spec"><i class="fas fa-tachometer-alt"></i> 1,500 mi</span>
+              <span class="car-spec"><i class="fas fa-gas-pump"></i> Petrol</span>
+              <span class="car-spec"><i class="fas fa-cog"></i> Automatic</span>
+            </div>
+            <div class="car-card-actions">
+              <a href="car-details.html" class="btn btn-primary">View Details</a>
+              <a href="https://wa.me/09061957126?text=Hi!%20I'm%20interested%20in%20the%20Toyota%20Avalon%20XLE" class="btn btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Car Card 5 -->
+        <div class="car-card" data-brand="Toyota" data-price="26500000" data-year="2019" data-fuel="Petrol">
+          <div class="car-card-image">
+            <div class="car-favorite" onclick="toggleFavorite(this)">
+              <i class="far fa-heart"></i>
+            </div>
+            <img src="Image/Toyota Highlander XSE/1.jpeg" alt="Toyota Highlander XSE">
+          </div>
+          <div class="car-card-content">
+             <h3 class="car-card-title">Toyota Highlander XLE 2019</h3>
+            <p class="car-card-price">₦26,500,000</p>
+            <div class="car-card-specs">
+              <span class="car-spec"><i class="fas fa-calendar"></i> 2019</span>
+              <span class="car-spec"><i class="fas fa-tachometer-alt"></i> 5,200 mi</span>
+              <span class="car-spec"><i class="fas fa-gas-pump"></i> Petrol</span>
+              <span class="car-spec"><i class="fas fa-cog"></i> Automatic</span>
+            </div>
+            <div class="car-card-actions">
+              <a href="car-details.html" class="btn btn-primary">View Details</a>
+              <a href="https://wa.me/09061957126?text=Hi!%20I'm%20interested%20in%20the%20Toyota%20Highlander%20XLE" class="btn btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Car Card 6 -->
+        <div class="car-card" data-brand="Toyota" data-price="12500000" data-year="2013" data-fuel="Hybrid">
+          <div class="car-card-image">
+            <span class="car-badge">Petrol</span>
+            <div class="car-favorite" onclick="toggleFavorite(this)">
+              <i class="far fa-heart"></i>
+            </div>
+            <img src="Image/2013 Toyota Camry Sport/1.jpeg" alt="Toyota Camry Sport 2013">
+          </div>
+          <div class="car-card-content">
+            <h3 class="car-card-title">Toyota Camry Sport 2013</h3>
+            <p class="car-card-price">₦12,500,000</p>
+            <div class="car-card-specs">
+              <span class="car-spec"><i class="fas fa-calendar"></i> 2013</span>
+              <span class="car-spec"><i class="fas fa-tachometer-alt"></i> 12,500 mi</span>
+              <span class="car-spec"><i class="fas fa-leaf"></i> Hybrid</span>
+              <span class="car-spec"><i class="fas fa-cog"></i> Automatic</span>
+            </div>
+            <div class="car-card-actions">
+              <a href="car-details.html" class="btn btn-primary">View Details</a>
+              <a href="https://wa.me/09061957126?text=Hi!%20I'm%20interested%20in%20the%20Toyota%20Camry%20Sport%202013" class="btn btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Car Card 7 -->
+        <div class="car-card" data-brand="Lexus" data-price="19000000" data-year="2010" data-fuel="Petrol">
+          <div class="car-card-image">
+            <div class="car-favorite" onclick="toggleFavorite(this)">
+              <i class="far fa-heart"></i>
+            </div>
+           <img src="Image/Lexus ES 350 Sedan/1.jpeg" alt="2010 Lexus ES 350 Sedan">
+          </div>
+          <div class="car-card-content">
+             <h3 class="car-card-title">2010 Lexus ES 350 Sedan</h3>
+            <p class="car-card-price">₦19,000,000</p>
+            <div class="car-card-specs">
+              <span class="car-spec"><i class="fas fa-calendar"></i> 2010</span>
+              <span class="car-spec"><i class="fas fa-tachometer-alt"></i> 3,800 mi</span>
+              <span class="car-spec"><i class="fas fa-gas-pump"></i> Petrol</span>
+              <span class="car-spec"><i class="fas fa-cog"></i> Automatic</span>
+            </div>
+            <div class="car-card-actions">
+              <a href="car-details.html" class="btn btn-primary">View Details</a>
+              <a href="https://wa.me/09061957126?text=Hi!%20I'm%20interested%20in%20the%20Lexus%20ES%20350%20Sedan" class="btn btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Car Card 8 -->
+        <!-- <div class="car-card" data-brand="BMW" data-price="74900" data-year="2024" data-fuel="Petrol">
+          <div class="car-card-image">
+            <span class="car-badge">New</span>
+            <div class="car-favorite" onclick="toggleFavorite(this)">
+              <i class="far fa-heart"></i>
+            </div>
+            <img src="https://images.unsplash.com/photo-1556189250-72ba954cfc2b?auto=format&fit=crop&w=800&q=80" alt="BMW X5 M">
+          </div>
+          <div class="car-card-content">
+            <h3 class="car-card-title">BMW X5 M Competition</h3>
+            <p class="car-card-price">$74,900</p>
+            <div class="car-card-specs">
+              <span class="car-spec"><i class="fas fa-calendar"></i> 2024</span>
+              <span class="car-spec"><i class="fas fa-tachometer-alt"></i> 1,800 mi</span>
+              <span class="car-spec"><i class="fas fa-gas-pump"></i> Petrol</span>
+              <span class="car-spec"><i class="fas fa-cog"></i> Automatic</span>
+            </div>
+            <div class="car-card-actions">
+              <a href="car-details.html" class="btn btn-primary">View Details</a>
+              <a href="https://wa.me/09061957126?text=Hi!%20I'm%20interested%20in%20the%20BMW%20X5%20M%20Competition" class="btn btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div> -->
+        
+        <!-- Car Card 9 -->
+        <!-- <div class="car-card" data-brand="Mercedes" data-price="139000" data-year="2024" data-fuel="Petrol">
+          <div class="car-card-image">
+            <span class="car-badge">Featured</span>
+            <div class="car-favorite" onclick="toggleFavorite(this)">
+              <i class="far fa-heart"></i>
+            </div>
+            <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80" alt="Mercedes G63 AMG">
+          </div>
+          <div class="car-card-content">
+            <h3 class="car-card-title">Mercedes G63 AMG</h3>
+            <p class="car-card-price">$139,000</p>
+            <div class="car-card-specs">
+              <span class="car-spec"><i class="fas fa-calendar"></i> 2024</span>
+              <span class="car-spec"><i class="fas fa-tachometer-alt"></i> 500 mi</span>
+              <span class="car-spec"><i class="fas fa-gas-pump"></i> Petrol</span>
+              <span class="car-spec"><i class="fas fa-cog"></i> Automatic</span>
+            </div>
+            <div class="car-card-actions">
+              <a href="car-details.html" class="btn btn-primary">View Details</a>
+              <a href="https://wa.me/09061957126?text=Hi!%20I'm%20interested%20in%20the%20Mercedes%20G63%20AMG" class="btn btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div> -->
+        
+        <!-- Car Card 10 -->
+        <!-- <div class="car-card" data-brand="Porsche" data-price="189000" data-year="2024" data-fuel="Petrol">
+          <div class="car-card-image">
+            <span class="car-badge">Exclusive</span>
+            <div class="car-favorite" onclick="toggleFavorite(this)">
+              <i class="far fa-heart"></i>
+            </div>
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" alt="Porsche Taycan">
+          </div>
+          <div class="car-card-content">
+            <h3 class="car-card-title">Porsche Taycan Turbo S</h3>
+            <p class="car-card-price">$189,000</p>
+            <div class="car-card-specs">
+              <span class="car-spec"><i class="fas fa-calendar"></i> 2024</span>
+              <span class="car-spec"><i class="fas fa-tachometer-alt"></i> 600 mi</span>
+              <span class="car-spec"><i class="fas fa-bolt"></i> Electric</span>
+              <span class="car-spec"><i class="fas fa-cog"></i> Automatic</span>
+            </div>
+            <div class="car-card-actions">
+              <a href="car-details.html" class="btn btn-primary">View Details</a>
+              <a href="https://wa.me/09061957126?text=Hi!%20I'm%20interested%20in%20the%20Porsche%20Taycan%20Turbo%20S" class="btn btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div> -->
+        
+        <!-- Car Card 11 -->
+        <!-- <div class="car-card" data-brand="Audi" data-price="89900" data-year="2023" data-fuel="Electric">
+          <div class="car-card-image">
+            <span class="car-badge">Electric</span>
+            <div class="car-favorite" onclick="toggleFavorite(this)">
+              <i class="far fa-heart"></i>
+            </div>
+            <img src="https://images.unsplash.com/photo-1614200187524-dc4b892acf16?auto=format&fit=crop&w=800&q=80" alt="Audi e-tron GT">
+          </div>
+          <div class="car-card-content">
+            <h3 class="car-card-title">Audi e-tron GT</h3>
+            <p class="car-card-price">$89,900</p>
+            <div class="car-card-specs">
+              <span class="car-spec"><i class="fas fa-calendar"></i> 2023</span>
+              <span class="car-spec"><i class="fas fa-tachometer-alt"></i> 4,200 mi</span>
+              <span class="car-spec"><i class="fas fa-bolt"></i> Electric</span>
+              <span class="car-spec"><i class="fas fa-cog"></i> Automatic</span>
+            </div>
+            <div class="car-card-actions">
+              <a href="car-details.html" class="btn btn-primary">View Details</a>
+              <a href="https://wa.me/09061957126?text=Hi!%20I'm%20interested%20in%20the%20Audi%20e-tron%20GT" class="btn btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div> -->
+        
+        <!-- Car Card 12 -->
+        <!-- <div class="car-card" data-brand="BMW" data-price="159000" data-year="2024" data-fuel="Petrol">
+          <div class="car-card-image">
+            <span class="car-badge">M Performance</span>
+            <div class="car-favorite" onclick="toggleFavorite(this)">
+              <i class="far fa-heart"></i>
+            </div>
+            <img src="https://images.unsplash.com/photo-1607853554439-0069ec0f29b6?auto=format&fit=crop&w=800&q=80" alt="BMW M8 Competition">
+          </div>
+          <div class="car-card-content">
+            <h3 class="car-card-title">BMW M8 Competition</h3>
+            <p class="car-card-price">$159,000</p>
+            <div class="car-card-specs">
+              <span class="car-spec"><i class="fas fa-calendar"></i> 2024</span>
+              <span class="car-spec"><i class="fas fa-tachometer-alt"></i> 900 mi</span>
+              <span class="car-spec"><i class="fas fa-gas-pump"></i> Petrol</span>
+              <span class="car-spec"><i class="fas fa-cog"></i> Automatic</span>
+            </div>
+            <div class="car-card-actions">
+              <a href="car-details.html" class="btn btn-primary">View Details</a>
+              <a href="https://wa.me/09061957126?text=Hi!%20I'm%20interested%20in%20the%20BMW%20M8%20Competition" class="btn btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      
+      <!-- No Results Message -->
+      <div class="no-results" id="noResults" style="display: none;">
+        <i class="fas fa-car"></i>
+        <h3>No cars found</h3>
+        <p>Try adjusting your filters or search terms</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3 class="footer-title">RadMotors</h3>
+          <p>Your trusted partner for premium vehicles. Experience luxury car buying like never before.</p>
+          <div class="flex gap-sm mt-md">
+            <a href="facebook.com/radmotor" style="color: var(--text-light);"><i class="fab fa-facebook-f"></i></a>
+            <a href="instagram.com/radmotors" style="color: var(--text-light);"><i class="fab fa-instagram"></i></a>
+            <a href="#" style="color: var(--text-light);"><i class="fab fa-twitter"></i></a>
+            <a href="#" style="color: var(--text-light);"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cars.html">Available Cars</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Car Categories</h3>
+          <ul class="footer-links">
+            <li><a href="categories.html">Luxury Cars</a></li>
+            <li><a href="categories.html">Sports Cars</a></li>
+            <li><a href="categories.html">SUVs</a></li>
+            <li><a href="categories.html">Sedans</a></li>
+            <li><a href="categories.html">Electric Vehicles</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Contact Info</h3>
+          <ul class="footer-links">
+            <li><i class="fas fa-map-marker-alt"></i> 123 Auto Boulevard, Palo Alto, CA 94301</li>
+            <li><i class="fas fa-phone"></i> 09061957126</li>
+            <li><i class="fas fa-envelope"></i> info@radmotors.com</li>
+            <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/09061957126" target="_blank">Chat on WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 RadMotors. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Buttons -->
+  <div class="floating-buttons">
+    <a href="https://wa.me/09061957126" class="floating-btn whatsapp-btn" target="_blank" title="Chat on WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <button class="floating-btn scroll-top-btn" onclick="scrollToTop()" title="Scroll to Top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    <button class="floating-btn scroll-bottom-btn" onclick="scrollToBottom()" title="Scroll to Bottom">
+      <i class="fas fa-arrow-down"></i>
+    </button>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Theme Toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById('theme-icon');
+      
+      if (html.getAttribute('data-theme') === 'light') {
+        html.setAttribute('data-theme', 'dark');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        html.setAttribute('data-theme', 'light');
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const icon = document.getElementById('theme-icon');
+      if (savedTheme === 'dark') {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      }
+    }
+    
+    // Navbar Toggle
+    function toggleNavbar() {
+      const nav = document.querySelector('.navbar-nav');
+      nav.classList.toggle('active');
+    }
+    
+    // Filter Cars
+    function filterCars() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const priceRange = document.getElementById('priceFilter').value;
+      const brand = document.getElementById('brandFilter').value;
+      const year = document.getElementById('yearFilter').value;
+      const fuel = document.getElementById('fuelFilter').value;
+      
+      const cars = document.querySelectorAll('.car-card');
+      let visibleCount = 0;
+      
+      cars.forEach(car => {
+        const carBrand = car.getAttribute('data-brand');
+        const carPrice = parseInt(car.getAttribute('data-price'));
+        const carYear = car.getAttribute('data-year');
+        const carFuel = car.getAttribute('data-fuel');
+        const carTitle = car.querySelector('.car-card-title').textContent.toLowerCase();
+        
+        let showCar = true;
+        
+        // Search filter
+        if (searchTerm && !carTitle.includes(searchTerm)) {
+          showCar = false;
+        }
+        
+        // Brand filter
+        if (brand && carBrand !== brand) {
+          showCar = false;
+        }
+        
+        // Year filter
+        if (year && carYear !== year) {
+          showCar = false;
+        }
+        
+        // Fuel filter
+        if (fuel && carFuel !== fuel) {
+          showCar = false;
+        }
+        
+        // Price filter
+        if (priceRange) {
+          const [min, max] = priceRange.split('-').map(Number);
+          if (carPrice < min || carPrice > max) {
+            showCar = false;
+          }
+        }
+        
+        if (showCar) {
+          car.style.display = 'flex';
+          visibleCount++;
+        } else {
+          car.style.display = 'none';
+        }
+      });
+      
+      // Update results count
+      document.getElementById('resultsCount').textContent = `Showing ${visibleCount} cars`;
+      
+      // Show/hide no results message
+      const noResults = document.getElementById('noResults');
+      if (visibleCount === 0) {
+        noResults.style.display = 'block';
+      } else {
+        noResults.style.display = 'none';
+      }
+    }
+    
+    // Reset Filters
+    function resetFilters() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('priceFilter').value = '';
+      document.getElementById('brandFilter').value = '';
+      document.getElementById('yearFilter').value = '';
+      document.getElementById('fuelFilter').value = '';
+      filterCars();
+    }
+    
+    // Toggle Favorite
+    function toggleFavorite(button) {
+      button.classList.toggle('active');
+      const icon = button.querySelector('i');
+      if (button.classList.contains('active')) {
+        icon.classList.remove('far');
+        icon.classList.add('fas');
+      } else {
+        icon.classList.remove('fas');
+        icon.classList.add('far');
+      }
+    }
+    
+    // Scroll to Top
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Scroll to Bottom
+    function scrollToBottom() {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+    
+    // Show/Hide Scroll Top Button
+    window.addEventListener('scroll', () => {
+      const scrollTopBtn = document.querySelector('.scroll-top-btn');
+      if (window.scrollY > 300) {
+        scrollTopBtn.style.opacity = '1';
+        scrollTopBtn.style.visibility = 'visible';
+      } else {
+        scrollTopBtn.style.opacity = '0';
+        scrollTopBtn.style.visibility = 'hidden';
+      }
+    });
+        // ...existing code...
+    
+    // Car Details Modal Functions
+    function openCarModal(event) {
+      event.preventDefault();
+      
+      // Get the car card element
+      const carCard = event.target.closest('.car-card');
+      
+      // Extract car data from the card
+      const carTitle = carCard.querySelector('.car-card-title').textContent;
+      const carPrice = carCard.querySelector('.car-card-price').textContent;
+      const carImage = carCard.querySelector('.car-card-image img').src;
+      const carYear = carCard.getAttribute('data-year');
+      const carBrand = carCard.getAttribute('data-brand');
+      const carFuel = carCard.getAttribute('data-fuel');
+      
+      // Get mileage from specs
+      const specs = carCard.querySelectorAll('.car-spec');
+      let mileage = '0 mi';
+      specs.forEach(spec => {
+        if (spec.textContent.includes('mi')) {
+          mileage = spec.textContent.trim();
+        }
+      });
+      
+      // Populate modal with car data
+      document.getElementById('modalCarTitle').textContent = carTitle;
+      document.getElementById('modalPrice').textContent = carPrice;
+      document.getElementById('modalYear').textContent = carYear;
+      document.getElementById('modalFuel').textContent = carFuel;
+      document.getElementById('modalMileage').textContent = mileage;
+      document.getElementById('modalTransmission').textContent = 'Automatic';
+      
+      // Add image to gallery
+      const gallery = document.getElementById('modalGallery');
+      gallery.innerHTML = `<div class="car-image-item"><img src="${carImage}" alt="${carTitle}"></div>`;
+      
+      // Add features
+      const features = document.getElementById('modalFeatures');
+      features.innerHTML = `
+        <div class="feature-item">
+          <i class="fas fa-check-circle"></i>
+          <span>Premium Quality</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-check-circle"></i>
+          <span>Certified Vehicle</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-check-circle"></i>
+          <span>Ready to Drive</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-check-circle"></i>
+          <span>Full Service History</span>
+        </div>
+      `;
+      
+      // Set WhatsApp link
+      const whatsappBtn = document.getElementById('modalWhatsappBtn');
+      const message = `Hi! I'm interested in the ${carTitle} priced at ${carPrice}. Please send me more details.`;
+      whatsappBtn.href = `https://wa.me/09061957126?text=${encodeURIComponent(message)}`;
+      
+      // Show modal
+      document.getElementById('carModal').style.display = 'flex';
+    }
+    
+    function closeCarModal() {
+      document.getElementById('carModal').style.display = 'none';
+    }
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+      const modal = document.getElementById('carModal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  </script>
+    <!-- Car Details Modal -->
+  <div class="modal" id="carModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalCarTitle">Car Name</h2>
+        <button class="modal-close" onclick="closeCarModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <!-- Car Images Gallery -->
+        <div class="car-images-gallery" id="modalGallery">
+          <!-- Images will be inserted here -->
+        </div>
+        
+        <!-- Car Details Grid -->
+        <div class="car-details-grid">
+          <div class="detail-item">
+            <label>Price</label>
+            <value id="modalPrice">₦0</value>
+          </div>
+          <div class="detail-item">
+            <label>Year</label>
+            <value id="modalYear">2024</value>
+          </div>
+          <div class="detail-item">
+            <label>Mileage</label>
+            <value id="modalMileage">0 mi</value>
+          </div>
+          <div class="detail-item">
+            <label>Fuel Type</label>
+            <value id="modalFuel">-</value>
+          </div>
+          <div class="detail-item">
+            <label>Transmission</label>
+            <value id="modalTransmission">Automatic</value>
+          </div>
+        </div>
+        
+        <!-- Features Section -->
+        <div class="car-features">
+          <h3>Features & Specifications</h3>
+          <div class="features-list" id="modalFeatures">
+            <!-- Features will be inserted here -->
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-actions">
+        <a href="#" class="btn btn-primary" id="modalWhatsappBtn" target="_blank">
+          <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
+        </a>
+        <button class="btn btn-secondary" onclick="closeCarModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

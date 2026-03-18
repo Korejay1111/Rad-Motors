@@ -1,0 +1,13 @@
+# System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Vs Code
+.vscode/
+
+# Logs
+*.log
+
+# Outputs
+outputs/

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium luxury car dealership - Find your dream car from our exclusive collection">
+    <meta name="keywords" content="luxury cars, premium cars, car dealership, BMW, Mercedes, Tesla">
+    <title>Available Cars | RadMotors </title>
+    <link rel="shortcut icon" href="Image/Rad.png" type="image/png">
+    <!-- page-specific styles (retain existing rules) -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- theme-aware global stylesheet should come later so its variable-driven rules can override if needed -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header" id="header">
+        <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <!-- <i class="fas fa-car-side text-gold"></i> -->
+         <img src="Image/Radlog.png" alt="Logo" style="width: 150px; height: 50px; margin-right: 8px;">
+        <!-- Rad<span>Motors</span> -->
+      </a>
+      <button class="navbar-toggle" id="navbarToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+               <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="navbar-link">Home</a></li>
+        <li><a href="cars.html" class="navbar-link">Available Cars</a></li>
+        <!-- <li><a href="categories.html" class="navbar-link">Categories</a></li> -->
+        <li><a href="about.html" class="navbar-link">About Us</a></li>
+        <li><a href="contact.html" class="navbar-link">Contact</a></li>
+        <li>
+          <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="fas fa-moon" id="theme-icon"></i>
+          </button>
+        </li>
+        <li><a href="https://wa.me/2349061957126" class="btn btn-primary btn-sm">Chat Now</a></li>
+      </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/2349061957126" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scroll Buttons -->
+    <button class="scroll-top" id="scrollTop" title="Scroll to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <button class="scroll-bottom" id="scrollBottom" title="Scroll to Bottom">
+        <i class="fas fa-arrow-down"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section" id="home">
+             <div class="hero-background">
+      <img src="Image/rad car.jpg" alt="Luxury Car">
+    </div>
+            <div class="hero-content">
+                <h1>Find Your Perfect Luxury Car</h1>
+                <p>Discover our exclusive collection of premium vehicles</p>
+            </div>
+        </section>
+
+        <!-- Animated Statistics -->
+        <section class="statistics-section">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-label">Cars Sold</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="50">0</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="20">0</div>
+                    <div class="stat-label">Trusted Brands</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Available Cars Section -->
+        <section class="available-cars-section" id="available-cars">
+            <div class="container">
+                <h2 class="section-title">Available Cars</h2>
+                
+                <!-- Filter & Search Area -->
+                <div class="filter-section">
+                    <div class="search-bar">
+                        <input type="text" id="searchInput" placeholder="Search by car name or keyword...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    
+                    <div class="filters-container">
+                        <div class="filter-group">
+                            <label>Brand</label>
+                            <select id="brandFilter">
+                                <option value="">All Brands</option>
+                                <option value="BMW">BMW</option>
+                                <option value="Mercedes">Mercedes</option>
+                                <option value="Tesla">Toyota</option>
+                                <option value="Audi">Lexus</option>
+                                <!-- <option value="Porsche"></option> -->
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label>Price Range</label>
+                            <div class="price-slider">
+                                <input type="range" id="priceRange" min="0" max="200000000" step="5000" value="200000000">
+                                <span id="priceValue">#200,000,000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label>Year</label>
+                            <select id="yearFilter">
+                                <option value="">All Years</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2012</option>
+                                <option value="2021">2010</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label>Fuel Type</label>
+                            <select id="fuelFilter">
+                                <option value="">All Types</option>
+                                <option value="Electric">Electric</option>
+                                <option value="Petrol">Petrol</option>
+                                <option value="Diesel">Diesel</option>
+                                <option value="Hybrid">Hybrid</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label>Transmission</label>
+                            <select id="transmissionFilter">
+                                <option value="">All Types</option>
+                                <option value="Automatic">Automatic</option>
+                                <option value="Manual">Manual</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label>Body Type</label>
+                            <select id="bodyTypeFilter">
+                                <option value="">All Types</option>
+                                <option value="SUV">SUV</option>
+                                <option value="Sedan">Sedan</option>
+                                <option value="Truck">Truck</option>
+                                <option value="Electric">Electric</option>
+                                <option value="Luxury">Luxury</option>
+                                <option value="Budget">Budget</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label>Sort By</label>
+                            <select id="sortFilter">
+                                <option value="default">Default</option>
+                                <option value="price-low">Price Low - High</option>
+                                <option value="price-high">Price High - Low</option>
+                                <option value="newest">Newest First</option>
+                            </select>
+                        </div>
+                        
+                        <button class="clear-filters-btn" id="clearFilters">
+                            <i class="fas fa-times"></i> Clear Filters
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cars Grid -->
+                <div class="cars-grid" id="carsGrid">
+                    <!-- Cars will be dynamically inserted here -->
+                </div>
+
+                <!-- No Results Message -->
+                <div class="no-results" id="noResults" style="display: none;">
+                    <i class="fas fa-car"></i>
+                    <h3>No cars found matching your criteria</h3>
+                    <p>Try adjusting your filters or search terms</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recently Viewed Section -->
+        <section class="recently-viewed-section" id="recentlyViewedSection" style="display: none;">
+            <div class="container">
+                <h2 class="section-title">Recently Viewed</h2>
+                <div class="recently-viewed-grid" id="recentlyViewedGrid">
+                    <!-- Recently viewed cars will be inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Compare Section -->
+        <section class="compare-section" id="compareSection" style="display: none;">
+            <div class="container">
+                <h2 class="section-title">Compare Cars</h2>
+                <div class="compare-container" id="compareContainer">
+                    <!-- Cars to compare will be inserted here -->
+                </div>
+                <div class="compare-actions">
+                    <button class="btn-clear-compare" id="clearCompare">
+                        <i class="fas fa-times"></i> Clear All
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Favorites Section -->
+        <section class="favorites-section" id="favoritesSection" style="display: none;">
+            <div class="container">
+                <h2 class="section-title">Your Favorites</h2>
+                <div class="favorites-grid" id="favoritesGrid">
+                    <!-- Favorite cars will be inserted here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Rad Motors</h3>
+                    <p>Your trusted partner in finding the perfect luxury vehicle.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-phone"></i> (234) 9061957126</p>
+                    <p><i class="fas fa-envelope"></i> radmotorsw@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i>Kuola Bus-stop  Akala Express, Ibadan </p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="facebook.com/radmotor"><i class="fab fa-facebook"></i></a>
+                        <a href="instagram.com/radmotors"><i class="fab fa-instagram"></i></a>
+                        <a href="twitter.com/radmotor"><i class="fab fa-twitter"></i></a>
+                        <a href="youtube.com/radmotors"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Rad Motors. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Car Details Modal -->
+    <div class="modal-overlay" id="carModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-body">
+                <!-- Image Gallery -->
+                <div class="modal-gallery">
+                    <div class="main-image-container">
+                        <img src="" alt="Car" class="main-image" id="modalMainImage">
+                        <button class="gallery-prev" id="galleryPrev">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-next" id="galleryNext">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="thumbnail-slider" id="thumbnailSlider">
+                        <!-- Thumbnails will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Car Details -->
+                <div class="modal-details">
+                    <div class="modal-header">
+                        <h2 id="modalCarName">Car Name</h2>
+                        <span class="modal-year" id="modalYear">2024</span>
+                        <span class="modal-price" id="modalPrice">#0</span>
+                        <span class="modal-status" id="modalStatus">In Stock</span>
+                    </div>
+
+                    <!-- Specifications -->
+                    <div class="modal-specifications">
+                        <h3>Specifications</h3>
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <i class="fas fa-cogs"></i>
+                                <span class="spec-label">Engine</span>
+                                <span class="spec-value" id="modalEngine">-</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-cog"></i>
+                                <span class="spec-label">Transmission</span>
+                                <span class="spec-value" id="modalTransmission">-</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span class="spec-label">Mileage</span>
+                                <span class="spec-value" id="modalMileage">-</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-gas-pump"></i>
+                                <span class="spec-label">Fuel Type</span>
+                                <span class="spec-value" id="modalFuel">-</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-chair"></i>
+                                <span class="spec-label">Interior</span>
+                                <span class="spec-value" id="modalInterior">-</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <span class="spec-label">Safety</span>
+                                <span class="spec-value" id="modalSafety">-</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-palette"></i>
+                                <span class="spec-label">Exterior</span>
+                                <span class="spec-value" id="modalExterior">-</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-tv"></i>
+                                <span class="spec-label">Infotainment</span>
+                                <span class="spec-value" id="modalInfotainment">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Why Get This Car -->
+                    <div class="modal-why-get">
+                        <h3>Why You Should Get This Car</h3>
+                        <div class="why-get-list" id="modalWhyGet">
+                            <!-- Benefits will be inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div class="modal-cta">
+                        <a href="#" class="btn-whatsapp-enquiry" id="modalWhatsappBtn" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-whatsapp"></i>
+                            Enquire on WhatsApp About This Car
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Mobile menu toggle
+        const navbarToggle = document.getElementById('navbarToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (navbarToggle && navLinks) {
+            navbarToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            // Close menu when a link is clicked
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.navbar-container')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn about RadMotors - your trusted premium car dealer. Our mission, vision, and the team behind our success.">
+  <meta name="keywords" content="about us, car dealer company, automotive team, rad motors dealer">
+  <title>About Us | RadMotors</title>
+   <link rel="shortcut icon" href="Image/Rad.png" type="image/png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    /* About Page Specific Styles */
+    .about-header {
+      background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-black) 100%);
+      color: var(--text-light);
+      padding: var(--spacing-2xl) 0;
+      text-align: center;
+    }
+    
+    /* Story Section */
+    .story-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-2xl);
+      align-items: center;
+    }
+    
+    @media (max-width: 1024px) {
+      .story-section {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .story-image {
+      position: relative;
+    }
+    
+    .story-image img {
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl);
+    }
+    
+    .story-badge {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+      color: var(--text-dark);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .story-badge .number {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+      display: block;
+    }
+    
+    .story-badge .text {
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    
+    /* Mission & Vision */
+    .mission-vision-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-xl);
+    }
+    
+    @media (max-width: 768px) {
+      .mission-vision-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .mv-card {
+      background: var(--background-light);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-light);
+      text-align: center;
+      transition: all var(--transition-base);
+    }
+    
+    .mv-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .mv-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--text-dark);
+      margin: 0 auto var(--spacing-md);
+    }
+    
+    .mv-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: var(--spacing-md);
+      color: var(--text-dark);
+    }
+    
+    /* Values Section */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-lg);
+    }
+    
+    @media (max-width: 1024px) {
+      .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .value-card {
+      background: var(--background-light);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-light);
+      transition: all var(--transition-base);
+    }
+    
+    .value-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+    }
+    
+    .value-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--background-gray);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      color: var(--primary-gold);
+      margin: 0 auto var(--spacing-md);
+      transition: all var(--transition-base);
+    }
+    
+    .value-card:hover .value-icon {
+      background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+      color: var(--text-dark);
+      transform: scale(1.1);
+    }
+    
+    .value-card h4 {
+      font-size: 1.125rem;
+      margin-bottom: var(--spacing-sm);
+      color: var(--text-dark);
+    }
+    
+    /* Team Section */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-lg);
+    }
+    
+    @media (max-width: 1024px) {
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .team-card {
+      background: var(--background-light);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-light);
+      transition: all var(--transition-base);
+    }
+    
+    .team-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+    }
+    
+    .team-image {
+      position: relative;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+    }
+    
+    .team-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+    
+    .team-card:hover .team-image img {
+      transform: scale(1.05);
+    }
+    
+    .team-social {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(10, 22, 40, 0.9), transparent);
+      padding: var(--spacing-md);
+      display: flex;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      transform: translateY(100%);
+      transition: transform var(--transition-base);
+    }
+    
+    .team-card:hover .team-social {
+      transform: translateY(0);
+    }
+    
+    .team-social a {
+      width: 40px;
+      height: 40px;
+      background: var(--background-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dark);
+      transition: all var(--transition-fast);
+    }
+    
+    .team-social a:hover {
+      background: var(--primary-gold);
+      color: var(--text-dark);
+      transform: translateY(-4px);
+    }
+    
+    .team-content {
+      padding: var(--spacing-md);
+      text-align: center;
+    }
+    
+    .team-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-xs);
+      color: var(--text-dark);
+    }
+    
+    .team-role {
+      color: var(--primary-gold);
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+    
+    /* Certifications */
+    .certifications {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-lg);
+    }
+    
+    @media (max-width: 768px) {
+      .certifications {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .cert-item {
+      background: var(--background-light);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-light);
+    }
+    
+    .cert-icon {
+      font-size: 3rem;
+      color: var(--primary-gold);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .cert-item h4 {
+      font-size: 1.25rem;
+      margin-bottom: var(--spacing-sm);
+      color: var(--text-dark);
+    }
+  </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <!-- <i class="fas fa-car-side text-gold"></i> -->
+         <img src="Image/Radlog.png" alt="Logo" style="width: 150px; height: 50px; margin-right: 8px;">
+        <!-- Rad<span>Motors</span> -->
+      </a>
+      
+      <button class="navbar-toggle" onclick="toggleNavbar()">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <ul class="navbar-nav">
+        <li><a href="index.html" class="navbar-link">Home</a></li>
+        <li><a href="cars.html" class="navbar-link">Available Cars</a></li>
+        <!-- <li><a href="categories.html" class="navbar-link">Categories</a></li> -->
+        <li><a href="about.html" class="navbar-link">About Us</a></li>
+        <li><a href="contact.html" class="navbar-link">Contact</a></li>
+        <li>
+          <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="fas fa-moon" id="theme-icon"></i>
+          </button>
+        </li>
+        <li><a href="https://wa.me/09061957126" class="btn btn-primary btn-sm">Chat Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="about-header">
+    <div class="container">
+      <h1>About RadMotors</h1>
+      <p style="font-size: 1.125rem; opacity: 0.9; max-width: 600px; margin: 0 auto;">Your trusted partner in finding the perfect premium vehicle</p>
+    </div>
+  </section>
+
+  <!-- Our Story -->
+  <section class="section">
+    <div class="container">
+      <div class="story-section">
+        <div class="story-content">
+          <span class="car-badge">Our Story</span>
+          <h2 style="font-size: 2.5rem; margin-bottom: var(--spacing-md); color: var(--text-dark);">Driving Excellence Since 2009</h2>
+          <p style="font-size: 1rem; margin-bottom: var(--spacing-md);">At <span style="color: var(--primary-gold);">Rad Motors</span>, we believe a car is more than metal and machinery, it is a symbol of progress, confidence, and personal success. Every vehicle tells a story, and we are proud to be part of our customers’ journeys.
+
+Founded on integrity, ambition, and an uncompromising standard for quality, <span style="color: var(--primary-gold);">Rad Motors</span> was built to redefine the car-buying experience. We specialize in sourcing clean, premium foreign-used and locally used vehicles that combine performance, comfort, and long-term value. Every unit in our inventory is carefully selected, inspected, and presented with transparency.
+
+Our approach is simple yet powerful:
+Trust. Quality. Excellence.
+
+We understand that buying a car is not just a transaction, it is an investment. That is why we prioritize honesty in pricing, clarity in documentation, and professionalism in every interaction. From first inquiry to final handover, we ensure a smooth, confident, and rewarding experience.
+
+At <span style="color: var(--primary-gold);">Rad Motors</span>, we don’t chase quick sales, we build lasting relationships. Our growing reputation is driven by satisfied clients who value reliability, class, and a dealership that stands behind its word.
+
+We are not just moving cars.
+We are delivering confidence, ambition, and the freedom to move forward</p>
+          <p style="margin-bottom: var(--spacing-lg);">Our journey began with a passion for exceptional automobiles and a commitment to customer service that goes above and beyond. Over the past 15 years, we've helped thousands of customers find their perfect vehicles, from first-time luxury buyers to seasoned collectors.</p>
+          
+          <div class="grid grid-2" style="gap: var(--spacing-md);">
+            <div>
+              <div style="font-size: 2rem; font-weight: 700; color: var(--primary-gold);">100+</div>
+              <div style="font-size: 0.875rem; color: var(--text-gray);">Cars Sold</div>
+            </div>
+            <div>
+              <div style="font-size: 2rem; font-weight: 700; color: var(--primary-gold);">98%</div>
+              <div style="font-size: 0.875rem; color: var(--text-gray);">Customer Satisfaction</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="story-image">
+          <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=800&q=80" alt="PremiumAuto Dealership">
+          <div class="story-badge">
+            <span class="number">15<span>
+            <span class="text">Years of Excellence</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="section section-gray">
+    <div class="container">
+      <div class="section-title">
+        <h2>Our Mission & Vision</h2>
+        <p>The principles that guide everything we do</p>
+      </div>
+      
+      <div class="mission-vision-grid">
+        <div class="mv-card">
+          <div class="mv-icon">
+            <i class="fas fa-bullseye"></i>
+          </div>
+          <h3>Our Mission</h3>
+          <p style="font-size: 1.125rem;">To provide an exceptional car-buying experience by offering premium vehicles at competitive prices, backed by unparalleled customer service and complete transparency. We strive to make every customer feel like family.</p>
+        </div>
+        
+        <div class="mv-card">
+          <div class="mv-icon">
+            <i class="fas fa-eye"></i>
+          </div>
+          <h3>Our Vision</h3>
+          <p style="font-size: 1.125rem;">To become the most trusted and respected premium automotive dealership in the nation, known for our integrity, expertise, and commitment to helping customers find their dream vehicles without compromise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Values -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Our Core Values</h2>
+        <p>The foundation of our business philosophy</p>
+      </div>
+      
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <h4>Integrity</h4>
+          <p style="font-size: 0.875rem;">Honest and transparent dealings in every interaction</p>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h4>Customer First</h4>
+          <p style="font-size: 0.875rem;">Your satisfaction is our top priority</p>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-medal"></i>
+          </div>
+          <h4>Excellence</h4>
+          <p style="font-size: 0.875rem;">Quality in everything we do</p>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h4>Teamwork</h4>
+          <p style="font-size: 0.875rem;">Collaborative approach to success</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Team -->
+  <!-- <section class="section section-gray">
+    <div class="container">
+      <div class="section-title">
+        <h2>Meet Our Team</h2>
+        <p>The passionate people behind PremiumAuto</p>
+      </div> -->
+      
+      <!-- <div class="team-grid">
+        <div class="team-card">
+          <div class="team-image">
+            <img src="Image/Rad.png" alt="James Mitchell" style="width: auto; height:auto">
+            <div class="team-social">
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div> -->
+          <!-- <div class="team-content"> -->
+            <!-- <h3 class="team-name">James Mitchell</h3> -->
+            <!-- <p class="team-role">Founder & CEO</p>
+          </div>
+        </div> -->
+        
+        <!-- <div class="team-card">
+          <div class="team-image">
+            <img src="Image/Rad.png" alt="Sarah Johnson" style="width: auto; height:auto">
+            <div class="team-social">
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+          <div class="team-content"> -->
+            <!-- <h3 class="team-name">Sarah Johnson</h3> -->
+            <!-- <p class="team-role">General Manager</p>
+          </div>
+        </div>
+        
+        <div class="team-card">
+          <div class="team-image">
+            <img src="Image/Rad.png" alt="Michael Chen" style="width: auto; height:auto">
+            <div class="team-social">
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+          <div class="team-content"> -->
+            <!-- <h3 class="team-name">Michael Chen</h3> -->
+            <!-- <p class="team-role">Sales Director</p>
+          </div>
+        </div>
+        
+        <div class="team-card">
+          <div class="team-image">
+            <img src="Image/Rad.png" alt="Emily Rodriguez" style="width: auto; height:auto">
+            <div class="team-social">
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+          <div class="team-content"> -->
+            <!-- <h3 class="team-name">Emily Rodriguez</h3> -->
+            <!-- <p class="team-role">Customer Relations Manager</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Certifications & Achievements -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Certifications & Achievements</h2>
+        <p>Recognition of our commitment to excellence</p>
+      </div>
+      
+      <div class="certifications">
+        <div class="cert-item">
+          <div class="cert-icon">
+            <i class="fas fa-award"></i>
+          </div>
+          <h4>Certified Dealer</h4>
+          <p style="font-size: 0.875rem; color: var(--text-gray);">Authorized dealer for 15+ premium brands</p>
+        </div>
+        
+        <div class="cert-item">
+          <div class="cert-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <h4>5-Star Rated</h4>
+          <p style="font-size: 0.875rem; color: var(--text-gray);">Consistently rated 5 stars by customers</p>
+        </div>
+        
+        <div class="cert-item">
+          <div class="cert-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h4>BBB Accredited</h4>
+          <p style="font-size: 0.875rem; color: var(--text-gray);">Better Business Bureau A+ Rating</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="section" style="background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%); color: var(--text-dark);">
+    <div class="container text-center">
+      <h2 style="margin-bottom: var(--spacing-md);">Ready to Experience the RadMotors Difference?</h2>
+      <p style="font-size: 1.125rem; margin-bottom: var(--spacing-lg); max-width: 600px; margin-left: auto; margin-right: auto;">Visit our dealership or get in touch with our team to start your journey toward owning your dream car.</p>
+      <div class="flex-center gap-md" style="flex-wrap: wrap;">
+        <a href="cars.html" class="btn btn-secondary btn-lg">Browse Our Inventory</a>
+        <a href="contact.html" class="btn btn-primary btn-lg">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3 class="footer-title">RadMotors</h3>
+          <p>Your trusted partner for premium vehicles. Experience luxury car buying like never before.</p>
+          <div class="flex gap-sm mt-md">
+            <a href="https://www.facebook.com/share/1EBYvyAUp6/?mibextid=wwXIfr" style="color: var(--text-light);"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/radmotors0?igsh=MnVicGtydXU5OXF0&utm_source=qr" style="color: var(--text-light);"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@radmotors0?_r=1&_t=ZS-94etfYcs5mm" style="color: var(--text-light);"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cars.html">Available Cars</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Car Categories</h3>
+          <ul class="footer-links">
+             <li><a href="cars.html">Luxury Cars</a></li>
+            <li><a href="cars.html">Sports Cars</a></li>
+            <li><a href="cars.html">SUVs</a></li>
+            <li><a href="cars.html">Sedans</a></li>
+            <li><a href="cars.html">Electric Vehicles</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Contact Info</h3>
+          <ul class="footer-links">
+            <li><i class="fas fa-map-marker-alt"></i> Kuola Bus-stop  Akala Express, Ibadan </li>
+            <li><i class="fas fa-phone"></i> 09061957126</li>
+            <li><i class="fas fa-envelope"></i> radmotorsw@gmail.com</li>
+            <li><i class="fab fa-whatsapp"></i> 09061957126</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 RadMotors. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!-- JavaScript -->
+  <script>
+    // Theme Toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById('theme-icon');
+      
+      if (html.getAttribute('data-theme') === 'light') {
+        html.setAttribute('data-theme', 'dark');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        html.setAttribute('data-theme', 'light');
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const icon = document.getElementById('theme-icon');
+      if (savedTheme === 'dark') {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      }
+    }
+    
+    // Navbar Toggle
+    function toggleNavbar() {
+      const nav = document.querySelector('.navbar-nav');
+      nav.classList.toggle('active');
+    }
+    
+    // Scroll to Top
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Scroll to Bottom
+    function scrollToBottom() {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+    
+    // Show/Hide Scroll Top Button
+    window.addEventListener('scroll', () => {
+      const scrollTopBtn = document.querySelector('.scroll-top-btn');
+      if (window.scrollY > 300) {
+        scrollTopBtn.style.opacity = '1';
+        scrollTopBtn.style.visibility = 'visible';
+      } else {
+        scrollTopBtn.style.opacity = '0';
+        scrollTopBtn.style.visibility = 'hidden';
+      }
+    });
+  </script>
+</body>
+</html>
