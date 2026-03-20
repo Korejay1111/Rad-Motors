@@ -45,8 +45,9 @@ async function fetchCarsFromSanity() {
     }
   }`);
 
- const url = `https://${SANITY_PROJECT_ID}.apicdn.sanity.io/v2024-01-01/data/query/${SANITY_DATASET}?query=${query}`;
- 
+  const url = `https://${SANITY_PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${SANITY_DATASET}?query=${query}`;
+
+  const response = await fetch(url);
   if (!response.ok) throw new Error(`Sanity fetch failed: ${response.status}`);
 
   const data = await response.json();
